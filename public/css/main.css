@@ -1,0 +1,31 @@
+/* ===========================================
+HOME HEADER
+=========================================== */
+
+#home-header {
+    color: white;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) ), url('../img/gaztelugatze.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#home-header .input-button {
+    display: flex;
+}
+
+#home-header .input-button input {
+    max-width: 80vw;
+    min-width: 50vw;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+#home-header .input-button button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}

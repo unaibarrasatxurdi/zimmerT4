@@ -4,9 +4,10 @@ use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/', function () { return view('welcome'); });
+
 // HOTELES
-Route::get('/', [HotelController::class, 'index']);
-Route::get('/hoteles', [HotelController::class, 'show']);
+Route::get('/hoteles', [HotelController::class, 'index']);
 
 Auth::routes();
 
