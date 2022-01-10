@@ -1,3 +1,5 @@
 @extends('layouts.base')
 
-<h1>HOTELES INDEX</h1>
+<div>
+    <h1>HOTELES INDEX</h1>
+</div>
