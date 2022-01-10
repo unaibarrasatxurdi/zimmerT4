@@ -7,8 +7,14 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () { return view('welcome'); });
 
 // HOTELES
-Route::get('/hoteles', [HotelController::class, 'index']);
 
+Route::group(['middleware' => ['cors']], function () {
+    Route::get('/hoteles', [HotelController::class, 'index']);
+});
+
+// Route::middleware('cors')->group(function() {
+//     Route::get('/hoteles', [HotelController::class, 'index']);
+// });
+
+// AUTH
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

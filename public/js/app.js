@@ -5304,8 +5304,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      hoteles: []
+    };
+  },
   mounted: function mounted() {
-    console.log("This is hotel.index component");
+    this.hoteles = this.getHoteles();
+  },
+  methods: {
+    getHoteles: function getHoteles() {
+      var _this = this;
+
+      var URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
+      axios.get(URL).then(function (response) {
+        var data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
+        _this.hoteles = JSON.parse(data);
+
+        for (var i = 0; i < _this.hoteles.length; i++) {
+          _this.hoteles[i].id = i;
+        }
+
+        console.log(_this.hoteles);
+      });
+    }
   }
 });
 
@@ -5369,22 +5391,7 @@ Vue.component('hotel-show', (__webpack_require__(/*! ./components/hotel/ShowComp
  */
 
 var app = new Vue({
-  el: '#app',
-  methods: {
-    getHoteles: function getHoteles() {
-      var _this = this;
-
-      var URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
-      axios.get(URL).then(function (response) {
-        var data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
-        _this.hoteles = JSON.parse(data);
-
-        for (var i = 0; i < _this.hoteles.length; i++) {
-          _this.hoteles[i].id = i;
-        }
-      });
-    }
-  }
+  el: '#app'
 });
 
 /***/ }),

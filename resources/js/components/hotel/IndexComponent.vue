@@ -41,8 +41,24 @@
 
 <script>
   export default {
+    data: () => ({
+      hoteles: []
+    }),
     mounted() {
-      console.log("This is hotel.index component");
+      this.hoteles = this.getHoteles();
     },
+    methods: {
+      getHoteles() {
+        const URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
+        axios.get(URL).then((response) => {
+          let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
+          this.hoteles = JSON.parse(data); 
+          for (let i = 0; i < this.hoteles.length; i++) {
+            this.hoteles[i].id = i;
+          }
+          console.log(this.hoteles);
+        });
+      },
+    }
   };
 </script>
