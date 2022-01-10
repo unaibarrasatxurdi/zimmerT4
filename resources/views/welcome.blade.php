@@ -4,9 +4,12 @@
 <div>
     <div id="home-header">
         <div class="text-center">
-            <h1>Bienvenido a Zimmer!</h1>
+            <h1 class="mb-4">Bienvenido a Zimmer!</h1>
+            <div class="container d-flex gap-3 w-50">
+                <input type="text" class="form-control">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
         </div>
-        <home-search></home-search>
     </div>
 
     <div class="destinations container d-flex justify-content-around flex-wrap my-5">
