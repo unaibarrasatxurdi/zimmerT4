@@ -1469,6 +1469,10 @@
                 "laravel",
                 "tailwind"
             ],
+            "support": {
+                "issues": "https://github.com/laravel/jetstream/issues",
+                "source": "https://github.com/laravel/jetstream"
+            },
             "time": "2021-12-30T20:37:45+00:00"
         },
         {
@@ -8519,5 +8523,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }
