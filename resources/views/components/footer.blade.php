@@ -1,4 +1,4 @@
-<footer class="text-center bg-dark text-light" id="footer">
+<footer class="bg-dark text-light" id="footer">
   <div class="container">
     <h1>Zimmer</h1>
     <small>Copyright &copy; Your Website</small>

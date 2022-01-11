@@ -34,6 +34,10 @@ ul li{
     color:white;
 }
 
+#footer{
+    text-align: center;
+}
+
 #footer a{
     font-size: 25px !important;
     color:white !important;
