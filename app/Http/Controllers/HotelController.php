@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HotelController extends Controller {
-    
+
     function index() {
-        return view('hoteles.index');
+        return view("hotel.index");
     }
 
-    function show() {
-        return view('hoteles.show');
+    function show($id) {
+        $user = Auth::user();
+        $comments = Comentario::where("hotel_id", "LIKE", $id)->orderBy("created_at", "DESC")->get();
+        return view("hotel.show", ["id" => $id, "user" => $user, "comments" => $comments]);
     }
 
 }

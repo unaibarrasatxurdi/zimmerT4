@@ -1,14 +1,12 @@
-@extends('layouts.base')
+@extends('layouts.app')
 
 @section('content')
+
 <div>
+
     <div id="home-header">
         <div class="text-center">
-            <h1 class="mb-4">Bienvenido a Zimmer!</h1>
-            <div class="container d-flex gap-3 w-50">
-                <input type="text" class="form-control" placeholder="Buscar hoteles en euskadi">
-                <button class="btn btn-primary">Buscar</button>
-            </div>
+            <h1>Bienvenido a Zimmer!</h1>
         </div>
     </div>
 
@@ -32,5 +30,7 @@
             </a>
         </div>
     </div>
+
 </div>
+
 @endsection

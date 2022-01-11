@@ -23,7 +23,8 @@ class Cors
             'Access-Control-Allow-Origin' => 'https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json',
             'Access-Control-Max-Age' => '3600',
             'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
-            'Access-Control-Allow-Headers' => 'Origin, Accept, Content-Type, X-Requested-With'
+            'Access-Control-Allow-Headers' => 'Origin, Accept, Content-Type, X-Requested-With, Access-Control-Allow-Headers, Origin, Authorization',
+            'Accept' => 'application/json'
         ];
 
         if ($request->getMethod() == "OPTIONS") {

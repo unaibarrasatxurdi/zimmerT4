@@ -1,0 +1,85 @@
+<template>
+  <div class="container">
+
+    <div v-if="hotel == null" class="d-flex gap-3 justify-content-center align-items-center">
+      <div class="spinner-border text-secondary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span class="text-muted">Cargando datos del hotel</span>
+    </div>
+
+    <div v-else class="hotel">
+      <div class="d-flex justify-content-between">
+        <span class="title">{{ hotel.documentName }}</span>
+        <i class="fa fa-heart fs-4 text-secondary"></i>
+      </div>
+      <span class="text-muted d-block mb-2">
+        {{ hotel.municipality }}, {{ hotel.territory }}
+      </span>
+      <span v-if="hotel.address.length" class="text-muted d-block mb-2">
+        {{ hotel.address }}
+      </span>
+      <p v-html="hotel.turismDescription"></p>
+      <div v-if="hotel.web" class="d-flex align-items-center gap-2 mb-2">
+        <i class="fa fa-globe text-muted fs-5"></i>
+        <a v-bind:href="hotel.web">Pagina web</a>
+      </div>
+      <div v-if="hotel.tourismEmail" class="d-flex align-items-center gap-2">
+        <i class="fa fa-envelope text-muted fs-5"></i>
+        <a v-bind:href="'mailto:' + hotel.tourismEmail">Correo electronico</a>
+      </div>
+    </div>
+
+  </div>
+
+</template>
+
+<script>
+
+  export default {
+
+    mounted() {
+      this.getHotel();
+    },
+
+    props: ["id"],
+
+    data: () => ({
+      hoteles: [],
+      hotel: null,
+      likes: [],
+      destination: ""
+    }),
+
+    computed: {
+
+      filteredHoteles() {
+        if (this.destination.length > 0) {
+          return this.hoteles.filter(hotel => {
+            return hotel.municipality.toLowerCase().includes(this.destination)
+              || hotel.locality.toLowerCase().includes(this.destination)
+              || hotel.territory.toLowerCase().includes(this.destination);
+          });
+        } else {
+          return this.hoteles;
+        }
+      }
+
+    },
+
+    methods: {
+
+      getHotel() {
+        const URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
+        axios.get(URL).then((response) => {
+          let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
+          this.hotel = JSON.parse(data)[this.id];
+          this.hotel.id = this.id;
+        });
+      },
+
+    }
+
+  };
+
+</script>

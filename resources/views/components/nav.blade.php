@@ -1,35 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Zimmer</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/hoteles">Hoteles</a>
-        </li>
-      </ul>
-      <div class="d-flex gap-3">
-          @auth
-            <div class="d-flex gap-3">
-              {{-- <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> --}}
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <x-jet-dropdown-link href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </x-jet-dropdown-link>
-              </form>
-            </div>
-          @else
-            <a href="/login" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-            @if (Route::has('register'))
-                <a href="/register" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-            @endif
-          @endauth
+      <a class="navbar-brand fw-bold" href="/">
+          <i class="fa fa-home"></i>
+          <span>ZIMMER</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/hoteles">Hoteles</a>
+              </li>
+          </ul>
+          <div class="d-flex">
+              @guest
+              @if (Route::has('login'))
+              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+              @endif
+
+              @if (Route::has('register'))
+              <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+              @endif
+              @else
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ Illuminate\Support\Facades\Auth::user()->name }}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li>
+                          <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
+                              <i class="fa fa-user fs-5 text-muted"></i>
+                              <span>Perfil</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a class="dropdown-item d-flex align-items-center gap-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                              <i class="fa fa-sign-out fs-5 text-muted"></i>
+                              <span>Cerrar sesión</span>
+                          </a>
+                      </li>
+                      <li>
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                          </form>
+                      </li>
+                  </ul>
+              </div>
+              @endguest
+              
+          </div>
       </div>
-    </div>
   </div>
 </nav>
