@@ -29,3 +29,6 @@ HOME HEADER
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
 }
+ul li{
+    display: inline;
+}
