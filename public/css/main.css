@@ -30,5 +30,12 @@ HOME HEADER
     border-bottom-left-radius: 0 !important;
 }
 ul li{
-    display: inline;
+    display: inline!important;
+    color:white;
+}
+
+#footer a{
+    font-size: 25px !important;
+    color:white !important;
+
 }
