@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div v-if="hoteles.length == 0" class="d-flex gap-3 justify-content-center align-items-center">
       <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -14,17 +13,19 @@
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
-      <input v-model="sartutakoIzena" id="filtro-nombre" type="text" class="form-control">
+      <input v-model="sartutakoIzena" id="filtro-nombre" type="text" class="form-control" />
       <div class="d-flex gap-3 mt-3">
         <select v-on:change="aldatuProbintzia($event)" id="filtro-provincia" class="form-select">
-                  <option default hidden>Aukeratu probintzia</option>
+          <option default hidden>Aukeratu probintzia</option>
           <option value="Bizkaia">Bizkaia</option>
           <option value="Gipuzkoa">Gipuzkoa</option>
           <option value="Araba">Araba</option>
         </select>
         <select v-on:change="aldatuOstatzeMota($event)" id="filtro-tipo" class="form-select">
           <option default hidden>Aukeratu ostatze mota</option>
-          <option v-bind:value="mota" v-for="(mota, index) in ostatzeak" v-bind:key="index">{{mota}}</option>
+          <option v-bind:value="mota" v-for="(mota, index) in ostatzeak" v-bind:key="index">
+            {{ mota }}
+          </option>
         </select>
       </div>
     </div>
@@ -35,21 +36,17 @@
           <span class="title"><a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a></span>
           <i class="fa fa-heart fs-4 text-secondary"></i>
         </div>
-        <span class="text-muted d-block mb-2">{{ hotel.municipality }}, {{ hotel.territory }},
-          {{ hotel.country }}
+        <span class="text-muted d-block mb-2">
+          {{ hotel.municipality }}, {{ hotel.territory }}, {{ hotel.country }}
         </span>
         <p v-html="truncate(hotel.turismDescription)"></p>
       </div>
     </div>
-
   </div>
-
 </template>
 
 <script>
-
 export default {
-
   mounted() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("provincia"))
@@ -62,89 +59,98 @@ export default {
     hoteles: [],
     likes: [],
     provincia: "",
-    sartutakoIzena: '',
-    sartutakoOstatzeMota: '',
+    sartutakoIzena: "",
+    sartutakoOstatzeMota: "",
     hoteles: [],
-    ostatzeMotak: []
+    ostatzeMotak: [],
   }),
 
- 
-
   computed: {
-
     filteredHoteles() {
       if (this.provincia.length > 0) {
-        return this.hoteles.filter(hotel => {
-          return hotel.municipality.toLowerCase().includes(this.provincia)
-            || hotel.locality.toLowerCase().includes(this.provincia)
-            || hotel.territory.toLowerCase().includes(this.provincia);
+        return this.hoteles.filter((hotel) => {
+          return (
+            hotel.municipality.toLowerCase().includes(this.provincia) ||
+            hotel.locality.toLowerCase().includes(this.provincia) ||
+            hotel.territory.toLowerCase().includes(this.provincia)
+          );
         });
       } else {
         return this.hoteles;
       }
     },
-            bilatu() {
-            let bilaketarenEmaitza = this.bilatuIzenarenArabera();
-             if (this.provincia.length > 0) {
-                bilaketarenEmaitza = this.bilatuProbintziarenArabera(bilaketarenEmaitza);
-            }
-            if (this.sartutakoOstatzeMota.length > 0) {
-                bilaketarenEmaitza = this.bilatuOstatzeMotarenArabera(bilaketarenEmaitza);
-            }
-            return bilaketarenEmaitza;
-        },
-        ostatzeak(){
-          return this.ostatzeMotak;
-        }
-
+    bilatu() {
+      let bilaketarenEmaitza = this.bilatuIzenarenArabera();
+      if (this.provincia.length > 0) {
+        bilaketarenEmaitza =
+          this.bilatuProbintziarenArabera(bilaketarenEmaitza);
+      }
+      if (this.sartutakoOstatzeMota.length > 0) {
+        bilaketarenEmaitza =
+          this.bilatuOstatzeMotarenArabera(bilaketarenEmaitza);
+      }
+      return bilaketarenEmaitza;
+    },
+    ostatzeak() {
+      return this.ostatzeMotak;
+    },
   },
 
   methods: {
-
     getHoteles() {
-      const URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
+      const URL =
+        "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
       axios.get(URL).then((response) => {
-        let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
-        this.hoteles = JSON.parse(data); 
+        let data = new String(response.data)
+          .replace("jsonCallback(", "")
+          .replace(");", "");
+        this.hoteles = JSON.parse(data);
         for (let i = 0; i < this.hoteles.length; i++) {
           this.hoteles[i].id = i;
-        };
-        this.ostatzeMotak=this.getOstatzeMotak();
+        }
+        this.ostatzeMotak = this.getOstatzeMotak();
       });
     },
-       truncate(descripcion){
-if(descripcion.length>100){
-  return descripcion.substring(0,100)+"...";
-
-}else{
-  return descripcion;
-}
+    truncate(descripcion) {
+      if (descripcion.length > 100) {
+        return descripcion.substring(0, 100) + "...";
+      } else {
+        return descripcion;
+      }
     },
-    getOstatzeMotak(){
-            let ostatzeMootaGuztiak = this.hoteles.map(hotel => hotel.lodgingType).sort().reduce(function (a, b) {
-                    if (a.slice(-1)[0] !== b) a.push(b);
-                    return a;
-                }, []);
-                return ostatzeMootaGuztiak;
+    getOstatzeMotak() {
+      let ostatzeMootaGuztiak = this.hoteles
+        .map((hotel) => hotel.lodgingType)
+        .sort()
+        .reduce(function (a, b) {
+          if (a.slice(-1)[0] !== b) a.push(b);
+          return a;
+        }, []);
+      return ostatzeMootaGuztiak;
     },
-        aldatuOstatzeMota(event) {
-            this.sartutakoOstatzeMota = event.target.value;
-        },
-        aldatuProbintzia(event) {
-            this.provincia = event.target.value;
-        },
-        bilatuIzenarenArabera() {
-            return this.hoteles.filter((hotel) => hotel.documentName.toLowerCase().includes(this.sartutakoIzena.toLowerCase()));
-        },
-        bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
-            return arrayDeResultadosRecibidos.filter((hotel) => hotel.territory.includes(this.provincia));
-        },
-        bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
-            return arrayDeResultadosRecibidos.filter((hotel) => hotel.lodgingType.includes(this.sartutakoOstatzeMota));
-        }
-
-  }
-
+    aldatuOstatzeMota(event) {
+      this.sartutakoOstatzeMota = event.target.value;
+    },
+    aldatuProbintzia(event) {
+      this.provincia = event.target.value;
+    },
+    bilatuIzenarenArabera() {
+      return this.hoteles.filter((hotel) =>
+        hotel.documentName
+          .toLowerCase()
+          .includes(this.sartutakoIzena.toLowerCase())
+      );
+    },
+    bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
+      return arrayDeResultadosRecibidos.filter((hotel) =>
+        hotel.territory.includes(this.provincia)
+      );
+    },
+    bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
+      return arrayDeResultadosRecibidos.filter((hotel) =>
+        hotel.lodgingType.includes(this.sartutakoOstatzeMota)
+      );
+    },
+  },
 };
-
 </script>

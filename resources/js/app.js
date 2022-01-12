@@ -13,6 +13,8 @@ window.axios.defaults.headers.common = {
     'Content-Type': 'application/json',
 };
 
+window.$ = window.jQuery = require('jquery')
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -28,6 +30,39 @@ window.axios.defaults.headers.common = {
 Vue.component('hotel-list', require('./components/hotel/ListComponent.vue').default);
 Vue.component('hotel-details', require('./components/hotel/DetailsComponent.vue').default);
 Vue.component('home-search', require('./components/SearchComponent.vue').default);
+
+Vue.component('comment', require('./components/CommentComponent.vue').default);
+
+/** 
+ * Vue Mixings
+ */
+
+Vue.mixin({
+    methods: {
+        getHoteles: function () {
+            const URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
+            axios.get(URL).then((response) => {
+                let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
+                this.hoteles = JSON.parse(data); 
+                for (let i = 0; i < this.hoteles.length; i++) {
+                this.hoteles[i].id = i;
+                }
+            });
+        },
+        getHotel: function (id) {
+            const URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
+            axios.get(URL).then((response) => {
+                let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
+                this.hoteles = JSON.parse(data); 
+                for (let i = 0; i < this.hoteles.length; i++) {
+                this.hoteles[i].id = i;
+                }
+            });
+        },
+        like: function(hotel_id, user_id) {},
+        comment: function(hotel_id, user_id, contenido) {}
+    },
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
