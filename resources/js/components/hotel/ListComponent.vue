@@ -112,6 +112,14 @@ export default {
         this.ostatzeMotak=this.getOstatzeMotak();
       });
     },
+       truncate(descripcion){
+if(descripcion.length>100){
+  return descripcion.substring(0,100)+"...";
+
+}else{
+  return descripcion;
+}
+    },
     getOstatzeMotak(){
             let ostatzeMootaGuztiak = this.hoteles.map(hotel => hotel.lodgingType).sort().reduce(function (a, b) {
                     if (a.slice(-1)[0] !== b) a.push(b);
