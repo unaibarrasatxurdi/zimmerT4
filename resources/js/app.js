@@ -38,6 +38,12 @@ Vue.component('comentario', require('./components/CommentComponent.vue').default
  */
 
 Vue.mixin({
+
+    data: () => ({
+        hoteles: [],
+        ostatzeMotak: []
+    }),
+
     methods: {
         getHoteles: function () {
             const URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
@@ -45,8 +51,9 @@ Vue.mixin({
                 let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
                 this.hoteles = JSON.parse(data); 
                 for (let i = 0; i < this.hoteles.length; i++) {
-                this.hoteles[i].id = i;
+                    this.hoteles[i].id = i;
                 }
+                this.ostatzeMotak = this.getOstatzeMotak();
             });
         },
         getHotel: function (id) {
@@ -55,9 +62,16 @@ Vue.mixin({
                 let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
                 this.hoteles = JSON.parse(data); 
                 for (let i = 0; i < this.hoteles.length; i++) {
-                this.hoteles[i].id = i;
+                    this.hoteles[i].id = i;
                 }
             });
+        },
+        getOstatzeMotak: function () {
+            return this.hoteles.map((hotel) => hotel.lodgingType).sort().reduce(function (a, b) {
+                if (a.slice(-1)[0] !== b) a.push(b);
+                    return a;
+                }, []
+            );
         },
         like: function(hotel_id, user_id) {},
         comment: function(hotel_id, user_id, contenido) {}

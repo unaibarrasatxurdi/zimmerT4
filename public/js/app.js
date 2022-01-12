@@ -5460,10 +5460,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("provincia")) this.provincia = urlParams.get("provincia").toLowerCase();
+    if (urlParams.get("probintzia")) this.probintzia = urlParams.get("probintzia").toLowerCase();
     this.getHoteles();
   },
   data: function data() {
@@ -5473,7 +5477,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: "Hoteles de euskadi",
       hoteles: [],
       likes: [],
-      provincia: "",
+      probintzia: "",
       sartutakoIzena: "",
       sartutakoOstatzeMota: ""
     }, _defineProperty(_ref, "hoteles", []), _defineProperty(_ref, "ostatzeMotak", []), _ref;
@@ -5482,7 +5486,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     irazkiHotelak: function irazkiHotelak() {
       var bilaketarenEmaitza = this.bilatuIzenarenArabera();
 
-      if (this.provincia.length > 0) {
+      if (this.probintzia.length > 0) {
         bilaketarenEmaitza = this.bilatuProbintziarenArabera(bilaketarenEmaitza);
       }
 
@@ -5497,21 +5501,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    getHoteles: function getHoteles() {
-      var _this = this;
-
-      var URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
-      axios.get(URL).then(function (response) {
-        var data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
-        _this.hoteles = JSON.parse(data);
-
-        for (var i = 0; i < _this.hoteles.length; i++) {
-          _this.hoteles[i].id = i;
-        }
-
-        _this.ostatzeMotak = _this.getOstatzeMotak();
-      });
-    },
     truncate: function truncate(descripcion) {
       if (descripcion.length > 100) {
         return descripcion.substring(0, 100) + "...";
@@ -5519,40 +5508,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return descripcion;
       }
     },
-    getOstatzeMotak: function getOstatzeMotak() {
-      var ostatzeMootaGuztiak = this.hoteles.map(function (hotel) {
-        return hotel.lodgingType;
-      }).sort().reduce(function (a, b) {
-        if (a.slice(-1)[0] !== b) a.push(b);
-        return a;
-      }, []);
-      return ostatzeMootaGuztiak;
-    },
-    aldatuOstatzeMota: function aldatuOstatzeMota(event) {
-      this.sartutakoOstatzeMota = event.target.value;
-    },
-    aldatuProbintzia: function aldatuProbintzia(event) {
-      this.provincia = event.target.value;
-    },
     bilatuIzenarenArabera: function bilatuIzenarenArabera() {
-      var _this2 = this;
+      var _this = this;
 
       return this.hoteles.filter(function (hotel) {
-        return hotel.documentName.toLowerCase().includes(_this2.sartutakoIzena.toLowerCase());
+        return hotel.documentName.toLowerCase().includes(_this.sartutakoIzena.toLowerCase());
       });
     },
     bilatuProbintziarenArabera: function bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
-      var _this3 = this;
+      var _this2 = this;
 
       return arrayDeResultadosRecibidos.filter(function (hotel) {
-        return hotel.territory.includes(_this3.provincia);
+        return hotel.territory.includes(_this2.probintzia);
       });
     },
     bilatuOstatzeMotarenArabera: function bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
-      var _this4 = this;
+      var _this3 = this;
 
       return arrayDeResultadosRecibidos.filter(function (hotel) {
-        return hotel.lodgingType.includes(_this4.sartutakoOstatzeMota);
+        return hotel.lodgingType.includes(_this3.sartutakoOstatzeMota);
       });
     }
   }
@@ -5599,6 +5573,12 @@ Vue.component('comentario', (__webpack_require__(/*! ./components/CommentCompone
  */
 
 Vue.mixin({
+  data: function data() {
+    return {
+      hoteles: [],
+      ostatzeMotak: []
+    };
+  },
   methods: {
     getHoteles: function getHoteles() {
       var _this = this;
@@ -5611,6 +5591,8 @@ Vue.mixin({
         for (var i = 0; i < _this.hoteles.length; i++) {
           _this.hoteles[i].id = i;
         }
+
+        _this.ostatzeMotak = _this.getOstatzeMotak();
       });
     },
     getHotel: function getHotel(id) {
@@ -5625,6 +5607,14 @@ Vue.mixin({
           _this2.hoteles[i].id = i;
         }
       });
+    },
+    getOstatzeMotak: function getOstatzeMotak() {
+      return this.hoteles.map(function (hotel) {
+        return hotel.lodgingType;
+      }).sort().reduce(function (a, b) {
+        if (a.slice(-1)[0] !== b) a.push(b);
+        return a;
+      }, []);
     },
     like: function like(hotel_id, user_id) {},
     comment: function comment(hotel_id, user_id, contenido) {}
@@ -39506,9 +39496,9 @@ var render = function () {
       : _vm._e(),
     _vm._v(" "),
     _c("div", [
-      _vm.provincia.length > 0
+      _vm.probintzia.length > 0
         ? _c("div", [
-            _c("h4", [_vm._v("'" + _vm._s(_vm.provincia) + "'-ko hotelak")]),
+            _c("h4", [_vm._v("'" + _vm._s(_vm.probintzia) + "'-ko hotelak")]),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted" }, [
               _vm._v(_vm._s(_vm.irazkiHotelak.length) + " hotel aurkituta"),
@@ -39555,11 +39545,29 @@ var render = function () {
             _c(
               "select",
               {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.probintzia,
+                    expression: "probintzia",
+                  },
+                ],
                 staticClass: "form-select",
-                attrs: { id: "filtro-provincia" },
+                attrs: { id: "filtro-probintzia" },
                 on: {
                   change: function ($event) {
-                    return _vm.aldatuProbintzia($event)
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.probintzia = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
                   },
                 },
               },
@@ -39585,11 +39593,29 @@ var render = function () {
             _c(
               "select",
               {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.sartutakoOstatzeMota,
+                    expression: "sartutakoOstatzeMota",
+                  },
+                ],
                 staticClass: "form-select",
                 attrs: { id: "filtro-tipo" },
                 on: {
                   change: function ($event) {
-                    return _vm.aldatuOstatzeMota($event)
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.sartutakoOstatzeMota = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
                   },
                 },
               },
@@ -39627,6 +39653,10 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("i", { staticClass: "fa fa-heart fs-4 text-secondary" }),
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-muted fw-normal" }, [
+            _vm._v(_vm._s(hotel.lodgingType)),
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "text-muted d-block mb-2" }, [
