@@ -5377,6 +5377,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5432,12 +5434,16 @@ __webpack_require__.r(__webpack_exports__);
     this.getHoteles();
   },
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       title: "Hoteles de euskadi",
       hoteles: [],
       likes: [],
-      provincia: ""
-    };
+      provincia: "",
+      sartutakoIzena: '',
+      sartutakoOstatzeMota: ''
+    }, _defineProperty(_ref, "hoteles", []), _defineProperty(_ref, "ostatzeMotak", []), _ref;
   },
   computed: {
     filteredHoteles: function filteredHoteles() {
@@ -5450,6 +5456,22 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return this.hoteles;
       }
+    },
+    bilatu: function bilatu() {
+      var bilaketarenEmaitza = this.bilatuIzenarenArabera();
+
+      if (this.provincia.length > 0) {
+        bilaketarenEmaitza = this.bilatuProbintziarenArabera(bilaketarenEmaitza);
+      }
+
+      if (this.sartutakoOstatzeMota.length > 0) {
+        bilaketarenEmaitza = this.bilatuOstatzeMotarenArabera(bilaketarenEmaitza);
+      }
+
+      return bilaketarenEmaitza;
+    },
+    ostatzeak: function ostatzeak() {
+      return this.ostatzeMotak;
     }
   },
   methods: {
@@ -5464,6 +5486,48 @@ __webpack_require__.r(__webpack_exports__);
         for (var i = 0; i < _this2.hoteles.length; i++) {
           _this2.hoteles[i].id = i;
         }
+
+        ;
+        _this2.ostatzeMotak = _this2.getOstatzeMotak();
+        console.log(23);
+        console.log(_this2.ostatzeMotak);
+      });
+      this.ostatzeMotak = this.getOstatzeMotak();
+    },
+    getOstatzeMotak: function getOstatzeMotak() {
+      var banana = this.hoteles.map(function (hotel) {
+        return hotel.lodgingType;
+      }).sort().reduce(function (a, b) {
+        if (a.slice(-1)[0] !== b) a.push(b);
+        return a;
+      }, []);
+      return banana;
+    },
+    aldatuOstatzeMota: function aldatuOstatzeMota(event) {
+      this.sartutakoOstatzeMota = event.target.value;
+    },
+    aldatuProbintzia: function aldatuProbintzia(event) {
+      this.provincia = event.target.value;
+    },
+    bilatuIzenarenArabera: function bilatuIzenarenArabera() {
+      var _this3 = this;
+
+      return this.hoteles.filter(function (hotel) {
+        return hotel.documentName.toLowerCase().includes(_this3.sartutakoIzena.toLowerCase());
+      });
+    },
+    bilatuProbintziarenArabera: function bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
+      var _this4 = this;
+
+      return arrayDeResultadosRecibidos.filter(function (hotel) {
+        return hotel.territory.includes(_this4.provincia);
+      });
+    },
+    bilatuOstatzeMotarenArabera: function bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
+      var _this5 = this;
+
+      return arrayDeResultadosRecibidos.filter(function (hotel) {
+        return hotel.lodgingType.includes(_this5.sartutakoOstatzeMota);
       });
     }
   }
@@ -28395,18 +28459,90 @@ var render = function () {
     _vm.hoteles.length > 0
       ? _c("div", { staticClass: "mb-5" }, [
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.sartutakoIzena,
+                expression: "sartutakoIzena",
+              },
+            ],
             staticClass: "form-control",
             attrs: { id: "filtro-nombre", type: "text" },
+            domProps: { value: _vm.sartutakoIzena },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.sartutakoIzena = $event.target.value
+              },
+            },
           }),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "d-flex gap-3 mt-3" }, [
+            _c(
+              "select",
+              {
+                staticClass: "form-select",
+                attrs: { id: "filtro-provincia" },
+                on: {
+                  change: function ($event) {
+                    return _vm.aldatuProbintzia($event)
+                  },
+                },
+              },
+              [
+                _c("option", { attrs: { default: "", hidden: "" } }, [
+                  _vm._v("Aukeratu probintzia"),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Bizkaia" } }, [
+                  _vm._v("Bizkaia"),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Gipuzkoa" } }, [
+                  _vm._v("Gipuzkoa"),
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Araba" } }, [_vm._v("Araba")]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "form-select",
+                attrs: { id: "filtro-tipo" },
+                on: {
+                  change: function ($event) {
+                    return _vm.aldatuOstatzeMota($event)
+                  },
+                },
+              },
+              [
+                _c("option", { attrs: { default: "", hidden: "" } }, [
+                  _vm._v("Aukeratu ostatze mota"),
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.ostatzeak, function (mota, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: mota } },
+                    [_vm._v(_vm._s(mota))]
+                  )
+                }),
+              ],
+              2
+            ),
+          ]),
         ])
       : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "hoteles" },
-      _vm._l(_vm.filteredHoteles, function (hotel, index) {
+      _vm._l(_vm.bilatu, function (hotel, index) {
         return _c("div", { key: index, staticClass: "hotel shadow-sm" }, [
           _c("div", { staticClass: "d-flex justify-content-between" }, [
             _c("span", { staticClass: "title" }, [
@@ -28449,36 +28585,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "visually-hidden" }, [_vm._v("Loading...")])]
     )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex gap-3 mt-3" }, [
-      _c(
-        "select",
-        { staticClass: "form-select", attrs: { id: "filtro-provincia" } },
-        [
-          _c("option", { attrs: { value: "bizkaia" } }, [_vm._v("Bizkaia")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "gipuzkoa" } }, [_vm._v("Gipuzkoa")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "araba" } }, [_vm._v("Araba")]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "select",
-        { staticClass: "form-select", attrs: { id: "filtro-tipo" } },
-        [
-          _c("option", { attrs: { value: "bizkaia" } }, [_vm._v("Bizkaia")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "gipuzkoa" } }, [_vm._v("Gipuzkoa")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "araba" } }, [_vm._v("Araba")]),
-        ]
-      ),
-    ])
   },
 ]
 render._withStripped = true
@@ -40651,7 +40757,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\Mikel\\\\Projects\\\\zimmerT4"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"D:\\\\Mikel\\\\Projects\\\\zimmerT4","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 
@@ -40813,7 +40919,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\Mikel\\\\Projects\
 /******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 					installedChunks[chunkId][0]();
 /******/ 				}
-/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 				installedChunks[chunkId] = 0;
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}

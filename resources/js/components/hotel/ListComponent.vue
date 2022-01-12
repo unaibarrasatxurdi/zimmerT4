@@ -14,23 +14,23 @@
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
-      <input id="filtro-nombre" type="text" class="form-control">
+      <input v-model="sartutakoIzena" id="filtro-nombre" type="text" class="form-control">
       <div class="d-flex gap-3 mt-3">
-        <select id="filtro-provincia" class="form-select">
-          <option value="bizkaia">Bizkaia</option>
-          <option value="gipuzkoa">Gipuzkoa</option>
-          <option value="araba">Araba</option>
+        <select v-on:change="aldatuProbintzia($event)" id="filtro-provincia" class="form-select">
+                  <option default hidden>Aukeratu probintzia</option>
+          <option value="Bizkaia">Bizkaia</option>
+          <option value="Gipuzkoa">Gipuzkoa</option>
+          <option value="Araba">Araba</option>
         </select>
-        <select id="filtro-tipo" class="form-select">
-          <option value="bizkaia">Bizkaia</option>
-          <option value="gipuzkoa">Gipuzkoa</option>
-          <option value="araba">Araba</option>
+        <select v-on:change="aldatuOstatzeMota($event)" id="filtro-tipo" class="form-select">
+          <option default hidden>Aukeratu ostatze mota</option>
+          <option v-bind:value="mota" v-for="(mota, index) in ostatzeak" v-bind:key="index">{{mota}}</option>
         </select>
       </div>
     </div>
 
     <div class="hoteles">
-      <div v-for="(hotel, index) in filteredHoteles" v-bind:key="index" class="hotel shadow-sm">
+      <div v-for="(hotel, index) in bilatu" v-bind:key="index" class="hotel shadow-sm">
         <div class="d-flex justify-content-between">
           <span class="title"><a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a></span>
           <i class="fa fa-heart fs-4 text-secondary"></i>
@@ -61,7 +61,11 @@ export default {
     title: "Hoteles de euskadi",
     hoteles: [],
     likes: [],
-    provincia: ""
+    provincia: "",
+    sartutakoIzena: '',
+    sartutakoOstatzeMota: '',
+    hoteles: [],
+    ostatzeMotak: []
   }),
 
   computed: {
@@ -76,7 +80,20 @@ export default {
       } else {
         return this.hoteles;
       }
-    }
+    },
+            bilatu() {
+            let bilaketarenEmaitza = this.bilatuIzenarenArabera();
+             if (this.provincia.length > 0) {
+                bilaketarenEmaitza = this.bilatuProbintziarenArabera(bilaketarenEmaitza);
+            }
+            if (this.sartutakoOstatzeMota.length > 0) {
+                bilaketarenEmaitza = this.bilatuOstatzeMotarenArabera(bilaketarenEmaitza);
+            }
+            return bilaketarenEmaitza;
+        },
+        ostatzeak(){
+          return this.ostatzeMotak;
+        }
 
   },
 
@@ -89,9 +106,32 @@ export default {
         this.hoteles = JSON.parse(data); 
         for (let i = 0; i < this.hoteles.length; i++) {
           this.hoteles[i].id = i;
-        }
+        };
+        this.ostatzeMotak=this.getOstatzeMotak();
       });
-    }
+    },
+    getOstatzeMotak(){
+            let ostatzeMootaGuztiak = this.hoteles.map(hotel => hotel.lodgingType).sort().reduce(function (a, b) {
+                    if (a.slice(-1)[0] !== b) a.push(b);
+                    return a;
+                }, []);
+                return ostatzeMootaGuztiak;
+    },
+        aldatuOstatzeMota(event) {
+            this.sartutakoOstatzeMota = event.target.value;
+        },
+        aldatuProbintzia(event) {
+            this.provincia = event.target.value;
+        },
+        bilatuIzenarenArabera() {
+            return this.hoteles.filter((hotel) => hotel.documentName.toLowerCase().includes(this.sartutakoIzena.toLowerCase()));
+        },
+        bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
+            return arrayDeResultadosRecibidos.filter((hotel) => hotel.territory.includes(this.provincia));
+        },
+        bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
+            return arrayDeResultadosRecibidos.filter((hotel) => hotel.lodgingType.includes(this.sartutakoOstatzeMota));
+        }
 
   }
 
