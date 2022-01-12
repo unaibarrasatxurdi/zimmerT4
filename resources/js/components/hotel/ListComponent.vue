@@ -38,7 +38,7 @@
         <span class="text-muted d-block mb-2">{{ hotel.municipality }}, {{ hotel.territory }},
           {{ hotel.country }}
         </span>
-        <p v-html="hotel.turismDescription"></p>
+        <p v-html="truncate(hotel.turismDescription)"></p>
       </div>
     </div>
 
@@ -67,6 +67,8 @@ export default {
     hoteles: [],
     ostatzeMotak: []
   }),
+
+ 
 
   computed: {
 
