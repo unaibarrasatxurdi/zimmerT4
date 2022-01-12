@@ -5428,7 +5428,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("destination")) this.destination = urlParams.get("destination").toLowerCase();
+    if (urlParams.get("provincia")) this.provincia = urlParams.get("provincia").toLowerCase();
     this.getHoteles();
   },
   data: function data() {
@@ -5436,16 +5436,16 @@ __webpack_require__.r(__webpack_exports__);
       title: "Hoteles de euskadi",
       hoteles: [],
       likes: [],
-      destination: ""
+      provincia: ""
     };
   },
   computed: {
     filteredHoteles: function filteredHoteles() {
       var _this = this;
 
-      if (this.destination.length > 0) {
+      if (this.provincia.length > 0) {
         return this.hoteles.filter(function (hotel) {
-          return hotel.municipality.toLowerCase().includes(_this.destination) || hotel.locality.toLowerCase().includes(_this.destination) || hotel.territory.toLowerCase().includes(_this.destination);
+          return hotel.municipality.toLowerCase().includes(_this.provincia) || hotel.locality.toLowerCase().includes(_this.provincia) || hotel.territory.toLowerCase().includes(_this.provincia);
         });
       } else {
         return this.hoteles;
@@ -28382,9 +28382,9 @@ var render = function () {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.destination.length > 0
+    _vm.provincia.length > 0
       ? _c("div", [
-          _c("h4", [_vm._v("Hoteles de '" + _vm._s(_vm.destination) + "'")]),
+          _c("h4", [_vm._v("Hoteles de '" + _vm._s(_vm.provincia) + "'")]),
           _vm._v(" "),
           _c("p", { staticClass: "text-muted" }, [
             _vm._v(_vm._s(_vm.filteredHoteles.length) + " hoteles encontrados"),

@@ -8,8 +8,8 @@
       <span class="text-muted">Buscando hoteles</span>
     </div>
 
-    <div v-if="destination.length > 0">
-      <h4>Hoteles de '{{ destination }}'</h4>
+    <div v-if="provincia.length > 0">
+      <h4>Hoteles de '{{ provincia }}'</h4>
       <p class="text-muted">{{ filteredHoteles.length }} hoteles encontrados</p>
     </div>
 
@@ -52,8 +52,8 @@ export default {
 
   mounted() {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("destination"))
-      this.destination = urlParams.get("destination").toLowerCase();
+    if (urlParams.get("provincia"))
+      this.provincia = urlParams.get("provincia").toLowerCase();
     this.getHoteles();
   },
 
@@ -61,17 +61,17 @@ export default {
     title: "Hoteles de euskadi",
     hoteles: [],
     likes: [],
-    destination: ""
+    provincia: ""
   }),
 
   computed: {
 
     filteredHoteles() {
-      if (this.destination.length > 0) {
+      if (this.provincia.length > 0) {
         return this.hoteles.filter(hotel => {
-          return hotel.municipality.toLowerCase().includes(this.destination)
-            || hotel.locality.toLowerCase().includes(this.destination)
-            || hotel.territory.toLowerCase().includes(this.destination);
+          return hotel.municipality.toLowerCase().includes(this.provincia)
+            || hotel.locality.toLowerCase().includes(this.provincia)
+            || hotel.territory.toLowerCase().includes(this.provincia);
         });
       } else {
         return this.hoteles;
