@@ -38,7 +38,7 @@
         <span class="text-muted d-block mb-2">{{ hotel.municipality }}, {{ hotel.territory }},
           {{ hotel.country }}
         </span>
-        <p v-html="hotel.turismDescription"></p>
+        <p v-html="truncate(hotel.turismDescription)"></p>
       </div>
     </div>
 
@@ -64,6 +64,8 @@ export default {
     provincia: ""
   }),
 
+ 
+
   computed: {
 
     filteredHoteles() {
@@ -76,7 +78,11 @@ export default {
       } else {
         return this.hoteles;
       }
-    }
+    },
+
+ 
+
+
 
   },
 
@@ -89,9 +95,23 @@ export default {
         this.hoteles = JSON.parse(data); 
         for (let i = 0; i < this.hoteles.length; i++) {
           this.hoteles[i].id = i;
-        }
+        } 
       });
+      
+              
+    },
+       truncate(descripcion){
+if(descripcion.length>100){
+  return descripcion.substring(0,100)+"...";
+
+}else{
+  return descripcion;
+}
     }
+ 
+
+
+
 
   }
 
