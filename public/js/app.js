@@ -39535,7 +39535,11 @@ var render = function () {
               },
             ],
             staticClass: "form-control",
-            attrs: { id: "filtro-nombre", type: "text" },
+            attrs: {
+              id: "filtro-nombre",
+              type: "text",
+              placeholder: "Bilatu hotelak",
+            },
             domProps: { value: _vm.sartutakoIzena },
             on: {
               input: function ($event) {
@@ -39560,9 +39564,11 @@ var render = function () {
                 },
               },
               [
-                _c("option", { attrs: { default: "", hidden: "" } }, [
-                  _vm._v("Aukeratu probintzia"),
-                ]),
+                _c(
+                  "option",
+                  { attrs: { default: "", selected: "", hidden: "" } },
+                  [_vm._v("Aukeratu probintzia")]
+                ),
                 _vm._v(" "),
                 _c("option", { attrs: { value: "Bizkaia" } }, [
                   _vm._v("Bizkaia"),
@@ -39588,9 +39594,11 @@ var render = function () {
                 },
               },
               [
-                _c("option", { attrs: { default: "", hidden: "" } }, [
-                  _vm._v("Aukeratu ostatze mota"),
-                ]),
+                _c(
+                  "option",
+                  { attrs: { default: "", selected: "", hidden: "" } },
+                  [_vm._v("Aukeratu ostatze mota")]
+                ),
                 _vm._v(" "),
                 _vm._l(_vm.ostatzeak, function (mota, index) {
                   return _c(

@@ -19,16 +19,16 @@
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
-      <input v-model="sartutakoIzena" id="filtro-nombre" type="text" class="form-control" />
+      <input v-model="sartutakoIzena" id="filtro-nombre" type="text" class="form-control" placeholder="Bilatu hotelak"/>
       <div class="d-flex gap-3 mt-3">
         <select v-on:change="aldatuProbintzia($event)" id="filtro-provincia" class="form-select">
-          <option default hidden>Aukeratu probintzia</option>
+          <option default selected hidden>Aukeratu probintzia</option>
           <option value="Bizkaia">Bizkaia</option>
           <option value="Gipuzkoa">Gipuzkoa</option>
           <option value="Araba">Araba</option>
         </select>
         <select v-on:change="aldatuOstatzeMota($event)" id="filtro-tipo" class="form-select">
-          <option default hidden>Aukeratu ostatze mota</option>
+          <option default selected hidden>Aukeratu ostatze mota</option>
           <option v-bind:value="mota" v-for="(mota, index) in ostatzeak" v-bind:key="index">
             {{ mota }}
           </option>
