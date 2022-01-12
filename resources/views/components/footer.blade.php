@@ -5,10 +5,10 @@
       <p>Zimmer zu vermieten</p>
     </div>
 
-    <div class="d-flex align-items-center flex-column">
-      <p class="m-0" >Sare Sozialak</p>
-      <div class="pl-0">
-        <ul class="social-icons mb-md p-0">
+    <div class="d-flex align-self-center flex-column m-0">
+      <p class="m-0">Sare Sozialak</p>
+      <div class="p-0">
+        <ul class="social-icons mb-md p-0 m-0">
           <li class="social-icons-fa-github"><a href="https://github.com/unaibarrasatxurdi/zimmerT4" target="_blank" title="GitHub"><i class="fa fa-github"></i></a>
           </li>
           <li class="social-icons-instagram"><a href="http://instagram.com" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a>

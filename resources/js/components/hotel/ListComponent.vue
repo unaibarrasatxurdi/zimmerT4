@@ -55,6 +55,8 @@
   </div>
 </template>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../pagination.js"></script>
 <script>
 export default {
   mounted() {
@@ -120,4 +122,9 @@ export default {
     },
   },
 };
+
+
+ // $("#hoteles").pagify(2, ".hotel");
+
 </script>
+
