@@ -7,9 +7,15 @@
       <span class="text-muted">Buscando hoteles</span>
     </div>
 
-    <div v-if="provincia.length > 0">
-      <h4>Hoteles de '{{ provincia }}'</h4>
-      <p class="text-muted">{{ filteredHoteles.length }} hoteles encontrados</p>
+    <div>
+      <div v-if="provincia.length > 0">
+        <h4>'{{ provincia }}'-ko hotelak</h4>
+        <p class="text-muted">{{ irazkiHotelak.length }} hotel aurkituta</p>
+      </div>
+      <div v-else>
+        <h4>Euskadiko hotelak</h4>
+        <p class="text-muted">{{ irazkiHotelak.length }} hotel aurkituta</p>
+      </div>
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
@@ -31,7 +37,7 @@
     </div>
 
     <div class="hoteles">
-      <div v-for="(hotel, index) in bilatu" v-bind:key="index" class="hotel shadow-sm">
+      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm">
         <div class="d-flex justify-content-between">
           <span class="title"><a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a></span>
           <i class="fa fa-heart fs-4 text-secondary"></i>
@@ -66,20 +72,7 @@ export default {
   }),
 
   computed: {
-    filteredHoteles() {
-      if (this.provincia.length > 0) {
-        return this.hoteles.filter((hotel) => {
-          return (
-            hotel.municipality.toLowerCase().includes(this.provincia) ||
-            hotel.locality.toLowerCase().includes(this.provincia) ||
-            hotel.territory.toLowerCase().includes(this.provincia)
-          );
-        });
-      } else {
-        return this.hoteles;
-      }
-    },
-    bilatu() {
+    irazkiHotelak() {
       let bilaketarenEmaitza = this.bilatuIzenarenArabera();
       if (this.provincia.length > 0) {
         bilaketarenEmaitza =

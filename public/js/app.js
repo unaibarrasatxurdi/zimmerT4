@@ -5454,6 +5454,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var urlParams = new URLSearchParams(window.location.search);
@@ -5473,18 +5479,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, _defineProperty(_ref, "hoteles", []), _defineProperty(_ref, "ostatzeMotak", []), _ref;
   },
   computed: {
-    filteredHoteles: function filteredHoteles() {
-      var _this = this;
-
-      if (this.provincia.length > 0) {
-        return this.hoteles.filter(function (hotel) {
-          return hotel.municipality.toLowerCase().includes(_this.provincia) || hotel.locality.toLowerCase().includes(_this.provincia) || hotel.territory.toLowerCase().includes(_this.provincia);
-        });
-      } else {
-        return this.hoteles;
-      }
-    },
-    bilatu: function bilatu() {
+    irazkiHotelak: function irazkiHotelak() {
       var bilaketarenEmaitza = this.bilatuIzenarenArabera();
 
       if (this.provincia.length > 0) {
@@ -5503,18 +5498,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     getHoteles: function getHoteles() {
-      var _this2 = this;
+      var _this = this;
 
       var URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
       axios.get(URL).then(function (response) {
         var data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
-        _this2.hoteles = JSON.parse(data);
+        _this.hoteles = JSON.parse(data);
 
-        for (var i = 0; i < _this2.hoteles.length; i++) {
-          _this2.hoteles[i].id = i;
+        for (var i = 0; i < _this.hoteles.length; i++) {
+          _this.hoteles[i].id = i;
         }
 
-        _this2.ostatzeMotak = _this2.getOstatzeMotak();
+        _this.ostatzeMotak = _this.getOstatzeMotak();
       });
     },
     truncate: function truncate(descripcion) {
@@ -5540,24 +5535,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.provincia = event.target.value;
     },
     bilatuIzenarenArabera: function bilatuIzenarenArabera() {
-      var _this3 = this;
+      var _this2 = this;
 
       return this.hoteles.filter(function (hotel) {
-        return hotel.documentName.toLowerCase().includes(_this3.sartutakoIzena.toLowerCase());
+        return hotel.documentName.toLowerCase().includes(_this2.sartutakoIzena.toLowerCase());
       });
     },
     bilatuProbintziarenArabera: function bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
-      var _this4 = this;
+      var _this3 = this;
 
       return arrayDeResultadosRecibidos.filter(function (hotel) {
-        return hotel.territory.includes(_this4.provincia);
+        return hotel.territory.includes(_this3.provincia);
       });
     },
     bilatuOstatzeMotarenArabera: function bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
-      var _this5 = this;
+      var _this4 = this;
 
       return arrayDeResultadosRecibidos.filter(function (hotel) {
-        return hotel.lodgingType.includes(_this5.sartutakoOstatzeMota);
+        return hotel.lodgingType.includes(_this4.sartutakoOstatzeMota);
       });
     }
   }
@@ -5598,7 +5593,7 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
 Vue.component('hotel-list', (__webpack_require__(/*! ./components/hotel/ListComponent.vue */ "./resources/js/components/hotel/ListComponent.vue")["default"]));
 Vue.component('hotel-details', (__webpack_require__(/*! ./components/hotel/DetailsComponent.vue */ "./resources/js/components/hotel/DetailsComponent.vue")["default"]));
 Vue.component('home-search', (__webpack_require__(/*! ./components/SearchComponent.vue */ "./resources/js/components/SearchComponent.vue")["default"]));
-Vue.component('comment', (__webpack_require__(/*! ./components/CommentComponent.vue */ "./resources/js/components/CommentComponent.vue")["default"]));
+Vue.component('comentario', (__webpack_require__(/*! ./components/CommentComponent.vue */ "./resources/js/components/CommentComponent.vue")["default"]));
 /** 
  * Vue Mixings
  */
@@ -39510,15 +39505,23 @@ var render = function () {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.provincia.length > 0
-      ? _c("div", [
-          _c("h4", [_vm._v("Hoteles de '" + _vm._s(_vm.provincia) + "'")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-muted" }, [
-            _vm._v(_vm._s(_vm.filteredHoteles.length) + " hoteles encontrados"),
+    _c("div", [
+      _vm.provincia.length > 0
+        ? _c("div", [
+            _c("h4", [_vm._v("'" + _vm._s(_vm.provincia) + "'-ko hotelak")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-muted" }, [
+              _vm._v(_vm._s(_vm.irazkiHotelak.length) + " hotel aurkituta"),
+            ]),
+          ])
+        : _c("div", [
+            _c("h4", [_vm._v("Euskadiko hotelak")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-muted" }, [
+              _vm._v(_vm._s(_vm.irazkiHotelak.length) + " hotel aurkituta"),
+            ]),
           ]),
-        ])
-      : _vm._e(),
+    ]),
     _vm._v(" "),
     _vm.hoteles.length > 0
       ? _c("div", { staticClass: "mb-5" }, [
@@ -39606,7 +39609,7 @@ var render = function () {
     _c(
       "div",
       { staticClass: "hoteles" },
-      _vm._l(_vm.bilatu, function (hotel, index) {
+      _vm._l(_vm.irazkiHotelak, function (hotel, index) {
         return _c("div", { key: index, staticClass: "hotel shadow-sm" }, [
           _c("div", { staticClass: "d-flex justify-content-between" }, [
             _c("span", { staticClass: "title" }, [

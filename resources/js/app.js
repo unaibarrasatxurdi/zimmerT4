@@ -31,7 +31,7 @@ Vue.component('hotel-list', require('./components/hotel/ListComponent.vue').defa
 Vue.component('hotel-details', require('./components/hotel/DetailsComponent.vue').default);
 Vue.component('home-search', require('./components/SearchComponent.vue').default);
 
-Vue.component('comment', require('./components/CommentComponent.vue').default);
+Vue.component('comentario', require('./components/CommentComponent.vue').default);
 
 /** 
  * Vue Mixings

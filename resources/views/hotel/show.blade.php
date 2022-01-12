@@ -44,9 +44,8 @@
             <p class="content"></p>
         </div>
     </div>
-    <div class="comments">
-        
-    </div>
+    
+    <comentario></comentario>
 
 </div>
 
