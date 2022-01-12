@@ -1,11 +1,6 @@
 <template>
   <div>
 
-    <div v-if="destination.length > 0">
-      <h4>Hoteles de '{{ destination }}'</h4>
-      <p class="text-muted mb-5">{{ filteredHoteles.length }} hoteles encontrados</p>
-    </div>
-
     <div v-if="hoteles.length == 0" class="d-flex gap-3 justify-content-center align-items-center">
       <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -13,7 +8,28 @@
       <span class="text-muted">Buscando hoteles</span>
     </div>
 
-    <div v-else class="hoteles">
+    <div v-if="destination.length > 0">
+      <h4>Hoteles de '{{ destination }}'</h4>
+      <p class="text-muted">{{ filteredHoteles.length }} hoteles encontrados</p>
+    </div>
+
+    <div v-if="hoteles.length > 0" class="mb-5">
+      <input id="filtro-nombre" type="text" class="form-control">
+      <div class="d-flex gap-3 mt-3">
+        <select id="filtro-provincia" class="form-select">
+          <option value="bizkaia">Bizkaia</option>
+          <option value="gipuzkoa">Gipuzkoa</option>
+          <option value="araba">Araba</option>
+        </select>
+        <select id="filtro-tipo" class="form-select">
+          <option value="bizkaia">Bizkaia</option>
+          <option value="gipuzkoa">Gipuzkoa</option>
+          <option value="araba">Araba</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hoteles">
       <div v-for="(hotel, index) in filteredHoteles" v-bind:key="index" class="hotel shadow-sm">
         <div class="d-flex justify-content-between">
           <span class="title"><a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a></span>
@@ -22,6 +38,7 @@
         <span class="text-muted d-block mb-2">{{ hotel.municipality }}, {{ hotel.territory }},
           {{ hotel.country }}
         </span>
+        <p v-html="hotel.turismDescription"></p>
       </div>
     </div>
 
@@ -30,6 +47,7 @@
 </template>
 
 <script>
+
 export default {
 
   mounted() {
