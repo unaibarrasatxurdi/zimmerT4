@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="hoteles.length == 0" class="d-flex gap-3 justify-content-center align-items-center">
+    <div
+      v-if="hoteles.length == 0"
+      class="d-flex gap-3 justify-content-center align-items-center"
+    >
       <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -19,7 +22,13 @@
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
-      <input v-model="sartutakoIzena" id="filtro-nombre" type="text" class="form-control" placeholder="Bilatu hotelak"/>
+      <input
+        v-model="sartutakoIzena"
+        id="filtro-nombre"
+        type="text"
+        class="form-control"
+        placeholder="Bilatu hotelak"
+      />
       <div class="d-flex gap-3 mt-3">
         <!--v-on:change="aldatuProbintzia($event)"-->
         <select v-model="probintzia" id="filtro-probintzia" class="form-select">
@@ -28,9 +37,17 @@
           <option value="Gipuzkoa">Gipuzkoa</option>
           <option value="Araba">Araba</option>
         </select>
-        <select v-model="sartutakoOstatzeMota" id="filtro-tipo" class="form-select">
+        <select
+          v-model="sartutakoOstatzeMota"
+          id="filtro-tipo"
+          class="form-select"
+        >
           <option default selected hidden>Aukeratu ostatze mota</option>
-          <option v-bind:value="mota" v-for="(mota, index) in ostatzeak" v-bind:key="index">
+          <option
+            v-bind:value="mota"
+            v-for="(mota, index) in ostatzeak"
+            v-bind:key="index"
+          >
             {{ mota }}
           </option>
         </select>
@@ -38,7 +55,11 @@
     </div>
 
     <div class="hoteles">
-      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm">
+      <div
+        v-for="(hotel, index) in irazkiHotelak"
+        v-bind:key="index"
+        class="hotel shadow-sm"
+      >
         <div class="d-flex justify-content-between">
           <span class="title">
             <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
@@ -52,10 +73,11 @@
         <p v-html="truncate(hotel.turismDescription)"></p>
       </div>
     </div>
+  
   </div>
 </template>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../../pagination.js"></script>
 <script>
 export default {
@@ -124,7 +146,4 @@ export default {
 };
 
 
- // $("#hoteles").pagify(2, ".hotel");
-
 </script>
-
