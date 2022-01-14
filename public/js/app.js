@@ -5486,13 +5486,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("probintzia")) this.probintzia = urlParams.get("probintzia").toLowerCase();
-    this.getHoteles();
+    this.getHoteles(); //Pagination
+
+    $("#mhoteles").Pagination()({
+      dataSource: [1, 2, 3, 4, 5, 6, 7, 100],
+      pageSize: 5,
+      showPrevious: false,
+      showNext: false,
+      callback: function callback(data, pagination) {
+        // template method of yourself
+        var html = template(data);
+        dataContainer.html(html);
+      }
+    });
   },
   data: function data() {
     var _ref;
@@ -39666,7 +39676,7 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "hoteles" },
+      { staticClass: "hoteles", attrs: { id: "mhoteles" } },
       _vm._l(_vm.irazkiHotelak, function (hotel, index) {
         return _c("div", { key: index, staticClass: "hotel shadow-sm" }, [
           _c("div", { staticClass: "d-flex justify-content-between" }, [

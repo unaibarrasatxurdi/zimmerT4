@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div class="hoteles">
+    <div class="hoteles" id="mhoteles">
       <div
         v-for="(hotel, index) in irazkiHotelak"
         v-bind:key="index"
@@ -73,12 +73,10 @@
         <p v-html="truncate(hotel.turismDescription)"></p>
       </div>
     </div>
-  
   </div>
 </template>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../../pagination.js"></script>
+
 <script>
 export default {
   mounted() {
@@ -86,6 +84,21 @@ export default {
     if (urlParams.get("probintzia"))
       this.probintzia = urlParams.get("probintzia").toLowerCase();
     this.getHoteles();
+
+    //Pagination
+   
+
+     $("#mhoteles").Pagination()({
+      dataSource: [1, 2, 3, 4, 5, 6, 7, 100],
+      pageSize: 5,
+      showPrevious: false,
+      showNext: false,
+      callback: function (data, pagination) {
+        // template method of yourself
+        var html = template(data);
+        dataContainer.html(html);
+      },
+    });
   },
 
   data: () => ({
@@ -144,6 +157,4 @@ export default {
     },
   },
 };
-
-
 </script>
