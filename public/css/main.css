@@ -81,6 +81,22 @@ INDEX DESTINATIONS
 .destinations img:hover {
     opacity: 0.95;
 }
+/* ===========================================
+INDEX MOTAK
+=========================================== */
+
+.motak img {
+    transition: opacity 0.3s;
+    opacity: 0.8;
+}
+
+.motak img:hover {
+    opacity: 0.95;
+}
+
+#motak{
+    background-color: #CDCDCD;
+}
 
 /* ===========================================
 USER ICON
@@ -142,11 +158,12 @@ FOOTER
 =========================================== */
 
 #footer{
-font-size: 20px;
-position:fixed;
+   font-size: 20px;
    left:0px;
    right: 0px;
-   bottom:0px;
+   bottom: auto;
+   width: 100%;
+   position: absolute;
 }
 #footer ul li{
     display: inline;
@@ -155,4 +172,5 @@ position:fixed;
 #footer a{
     color:white;
 }
+
 
