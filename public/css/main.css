@@ -143,6 +143,10 @@ FOOTER
 
 #footer{
 font-size: 20px;
+position:fixed;
+   left:0px;
+   right: 0px;
+   bottom:0px;
 }
 #footer ul li{
     display: inline;
