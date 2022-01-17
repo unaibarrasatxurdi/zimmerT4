@@ -9,4 +9,6 @@ class Favorito extends Model {
     
     use HasFactory;
 
+    protected $table = 'favoritos';
+
 }
