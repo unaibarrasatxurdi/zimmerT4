@@ -22,6 +22,7 @@
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
+    <!-- probintzia sartutakoIzena - bilatuIzenarenArabera funtzioak erabiltzen du -->
       <input
         v-model="sartutakoIzena"
         id="filtro-nombre"
@@ -30,13 +31,15 @@
         placeholder="Bilatu hotelak"
       />
       <div class="d-flex gap-3 mt-3">
-        <!--v-on:change="aldatuProbintzia($event)"-->
+        <!-- probintzia aldagaia - bilatuProbintziarenArabera funtzioak erabiltzen du -->
         <select v-model="probintzia" id="filtro-probintzia" class="form-select">
           <option default selected hidden>Aukeratu probintzia</option>
           <option value="Bizkaia">Bizkaia</option>
           <option value="Gipuzkoa">Gipuzkoa</option>
           <option value="Araba">Araba</option>
         </select>
+
+        <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
         <select
           v-model="sartutakoOstatzeMota"
           id="filtro-tipo"
@@ -113,6 +116,8 @@ export default {
   }),
 
   computed: {
+    /* hotelak filtratzen ditu izena, probintzia eta ostatze motaren arabera
+    return bilaketa betetzen duten hotelak */
     irazkiHotelak() {
       let bilaketarenEmaitza = this.bilatuIzenarenArabera();
       if (this.probintzia.length > 0) {
@@ -138,6 +143,8 @@ export default {
         return descripcion;
       }
     },
+    /* inputean sartutako izena hartu, 
+    hotelen array-a filtratu eta return izena duten hotelen array-a */
     bilatuIzenarenArabera() {
       return this.hoteles.filter((hotel) =>
         hotel.documentName
@@ -145,11 +152,17 @@ export default {
           .includes(this.sartutakoIzena.toLowerCase())
       );
     },
+    /* aukeratutako probintzia hartu, 
+    array-a jaso parametro bezala eta filtratu probintziaren arabera.
+    Return probintzia duten hotelen array-a */
     bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
       return arrayDeResultadosRecibidos.filter((hotel) =>
         hotel.territory.includes(this.probintzia)
       );
     },
+    /* aukeratutako ostatze mota hartu, 
+    array-a jaso parametro bezala eta filtratu motaren arabera.
+    Return ostatze mota duten hotelen array-a */
     bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
       return arrayDeResultadosRecibidos.filter((hotel) =>
         hotel.lodgingType.includes(this.sartutakoOstatzeMota)
