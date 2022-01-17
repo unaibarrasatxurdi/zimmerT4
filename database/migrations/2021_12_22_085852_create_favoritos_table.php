@@ -17,7 +17,7 @@ class CreateFavoritosTable extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users");
-            $table->string('nombreHotel', 150);
+            $table->integer("hotel_id");
             $table->timestamps();
         });
     }

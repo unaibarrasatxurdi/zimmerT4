@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Comentario;
+use App\Models\Favorito;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory()
+        ->count(10)
+        ->hascomentario()
+        ->hasfavorito()
+        ->create();
+        Comentario::factory()
+        ->count(10)
+        ->foruser()
+        ->create();
+        Favorito::factory()
+        ->count(10)
+        ->foruser()
+        ->create();
     }
 }
