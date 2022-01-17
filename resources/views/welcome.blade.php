@@ -19,7 +19,7 @@
         </div>
         <div>
             <span class="d-block fw-bold">Bilbo</span>
-            <a href="/hoteles?destination=bilbao">
+            <a href="/hoteles?territory=Bizkaia">
                 <img src="img/bilbo.jpg" width="300px" class="shadow-sm">
             </a>
         </div>

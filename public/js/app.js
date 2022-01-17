@@ -5486,23 +5486,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("probintzia")) this.probintzia = urlParams.get("probintzia").toLowerCase();
-    this.getHoteles(); //Pagination
-
-    $("#mhoteles").Pagination()({
-      dataSource: [1, 2, 3, 4, 5, 6, 7, 100],
-      pageSize: 5,
-      showPrevious: false,
-      showNext: false,
-      callback: function callback(data, pagination) {
-        // template method of yourself
-        var html = template(data);
-        dataContainer.html(html);
-      }
-    });
+    this.getHoteles();
   },
   data: function data() {
     var _ref;
@@ -5517,6 +5508,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, _defineProperty(_ref, "hoteles", []), _defineProperty(_ref, "ostatzeMotak", []), _ref;
   },
   computed: {
+    /* hotelak filtratzen ditu izena, probintzia eta ostatze motaren arabera
+    return bilaketa betetzen duten hotelak */
     irazkiHotelak: function irazkiHotelak() {
       var bilaketarenEmaitza = this.bilatuIzenarenArabera();
 
@@ -5542,6 +5535,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return descripcion;
       }
     },
+
+    /* inputean sartutako izena hartu, 
+    hotelen array-a filtratu eta return izena duten hotelen array-a */
     bilatuIzenarenArabera: function bilatuIzenarenArabera() {
       var _this = this;
 
@@ -5549,6 +5545,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return hotel.documentName.toLowerCase().includes(_this.sartutakoIzena.toLowerCase());
       });
     },
+
+    /* aukeratutako probintzia hartu, 
+    array-a jaso parametro bezala eta filtratu probintziaren arabera.
+    Return probintzia duten hotelen array-a */
     bilatuProbintziarenArabera: function bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
       var _this2 = this;
 
@@ -5556,6 +5556,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return hotel.territory.includes(_this2.probintzia);
       });
     },
+
+    /* aukeratutako ostatze mota hartu, 
+    array-a jaso parametro bezala eta filtratu motaren arabera.
+    Return ostatze mota duten hotelen array-a */
     bilatuOstatzeMotarenArabera: function bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
       var _this3 = this;
 
