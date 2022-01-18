@@ -15,7 +15,7 @@ class ComentarioController extends Controller {
         $comentario->user_id = $request->get("user_id");
         $comentario->save();
 
-        return True;
+        return redirect($request->url());
 
     }
 

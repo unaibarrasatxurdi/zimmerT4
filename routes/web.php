@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ComentarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,5 @@ Route::middleware('cors')->group(function() {
     Route::get('/', function () { return view('welcome'); });
     Route::get('/hoteles', [HotelController::class, 'index']);
     Route::get('/hoteles/{id}', [HotelController::class, 'show'])->middleware('auth');
+    Route::post('/hoteles/{id}', [ComentarioController::class, 'create'])->middleware('auth');
 });

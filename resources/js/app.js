@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import moment from 'moment';
+
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -31,7 +33,16 @@ Vue.component('hotel-list', require('./components/hotel/ListComponent.vue').defa
 Vue.component('hotel-details', require('./components/hotel/DetailsComponent.vue').default);
 Vue.component('home-search', require('./components/SearchComponent.vue').default);
 
-Vue.component('comentario', require('./components/CommentComponent.vue').default);
+Vue.component('comentario', require('./components/ComentarioComponent.vue').default);
+
+/** 
+ * Vue Filters
+ */
+
+Vue.filter('formatDate', function(value) {
+    if (value)
+      return moment(String(value)).format('MM/DD/YYYY hh:mm');
+});
 
 /** 
  * Vue Mixings
@@ -73,8 +84,6 @@ Vue.mixin({
                 }, []
             );
         },
-        like: function(hotel_id, user_id) {},
-        comment: function(hotel_id, user_id, contenido) {}
     },
 });
 
