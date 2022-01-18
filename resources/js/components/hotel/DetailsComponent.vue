@@ -42,7 +42,6 @@
           <a v-bind:href="'mailto:' + hotel.tourismEmail">Correo electronico</a>
         </div>  
       </div>
-      <!-- <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
     </div>
 
   </div>
