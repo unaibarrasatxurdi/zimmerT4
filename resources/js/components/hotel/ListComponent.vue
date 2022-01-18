@@ -11,13 +11,15 @@
     </div>
 
     <div>
-      <div v-if="probintzia.length > 0">
-        <h4>'{{ probintzia }}'-ko hotelak</h4>
-        <p class="text-muted">{{ irazkiHotelak.length }} hotel aurkituta</p>
-      </div>
-      <div v-else>
-        <h4>Euskadiko hotelak</h4>
-        <p class="text-muted">{{ irazkiHotelak.length }} hotel aurkituta</p>
+      <div v-if="hoteles.length > 0">
+        <div v-if="probintzia.length > 0">
+          <h4>'{{ probintzia }}'-ko hotelak</h4>
+          <p class="text-muted">{{ irazkiHotelak.length }} hotel aurkituta</p>
+        </div>
+        <div v-else>
+          <h4>Euskadiko hotelak</h4>
+          <p class="text-muted">{{ irazkiHotelak.length }} hotel aurkituta</p>
+        </div>
       </div>
     </div>
 
@@ -34,9 +36,9 @@
         <!-- probintzia aldagaia - bilatuProbintziarenArabera funtzioak erabiltzen du -->
         <select v-model="probintzia" id="filtro-probintzia" class="form-select">
           <option default selected hidden value="">Aukeratu probintzia</option>
-          <option value="Bizkaia">Bizkaia</option>
-          <option value="Gipuzkoa">Gipuzkoa</option>
-          <option value="Araba">Araba</option>
+          <option value="bizkaia">Bizkaia</option>
+          <option value="gipuzkoa">Gipuzkoa</option>
+          <option value="araba">Araba</option>
         </select>
 
         <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
@@ -62,7 +64,7 @@
     <div class="hoteles" id="hoteles">
       <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-flex gap-4 align-items-center" >
         <div>
-          <img :src="'/img/default.png'" style="width: 10rem !important;">
+          <img :src="'/img/default.png'" style="max-width: 10rem !important;">
         </div>
         <div class="w-100">
           <div class="d-flex justify-content-between">
@@ -145,7 +147,7 @@ export default {
     Return probintzia duten hotelen array-a */
     bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
       return arrayDeResultadosRecibidos.filter((hotel) =>
-        hotel.territory.includes(this.probintzia)
+        hotel.territory.toLowerCase().includes(this.probintzia.toLowerCase())
       );
     },
     /* aukeratutako ostatze mota hartu, 

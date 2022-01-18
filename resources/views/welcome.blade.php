@@ -12,20 +12,20 @@
 
     <div class="destinations container d-flex justify-content-around flex-wrap my-5">
         <div>
-            <span class="d-block fw-bold">Gasteiz</span>
-            <a href="/hoteles?destination=gasteiz">
+            <span class="d-block fw-bold">Araba</span>
+            <a href="/hoteles?probintzia=araba">
                 <img src="img/gasteiz.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
-            <span class="d-block fw-bold">Bilbo</span>
-            <a href="/hoteles?territory=Bizkaia">
+            <span class="d-block fw-bold">Bizkaia</span>
+            <a href="/hoteles?probintzia=bizkaia">
                 <img src="img/bilbo.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
-            <span class="d-block fw-bold">Donosti / San Sebastian</span>
-            <a href="/hoteles?destination=donosti">
+            <span class="d-block fw-bold">Gipuzkoa</span>
+            <a href="/hoteles?probintzia=gipuzkoa">
                 <img src="img/donosti.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
