@@ -6,7 +6,7 @@
 
     <div id="home-header">
         <div class="text-center">
-            <h1>Bienvenido a Zimmer!</h1>
+            <h1>Ongi etorri Zimmer-era!</h1>
         </div>
     </div>
 
