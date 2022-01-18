@@ -21,5 +21,4 @@ export default {
   props: ['comentario', 'usuario'],
 
 };
-
 </script>

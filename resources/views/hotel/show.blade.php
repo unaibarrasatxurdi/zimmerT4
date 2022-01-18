@@ -4,9 +4,14 @@
 
 <div class="container my-5">
 
-    <hotel-details :id="{{ $id }}" class="mb-5"></hotel-details>
+    <div class="d-flex gap-3">
+        <div>
+            <img src="{{ asset('img/default.png') }}" class="img-fluid" style="width: 25rem !important;">
+        </div>
+        <hotel-details :id="{{ $id }}" class="mb-5"></hotel-details>
+    </div>
 
-    <h4 class="mb-4">Comentarios</h4>
+    <h4 class="my-4">Comentarios</h4>
 
     @if($user)
         <form id="comment-form" method="POST" action="/hoteles/{{ $id }}" class="mb-2">
