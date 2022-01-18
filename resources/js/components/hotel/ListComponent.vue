@@ -22,7 +22,7 @@
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
-    <!-- probintzia sartutakoIzena - bilatuIzenarenArabera funtzioak erabiltzen du -->
+      <!-- probintzia sartutakoIzena - bilatuIzenarenArabera funtzioak erabiltzen du -->
       <input
         v-model="sartutakoIzena"
         id="filtro-nombre"
@@ -45,7 +45,9 @@
           id="filtro-tipo"
           class="form-select"
         >
-          <option default selected hidden value="">Aukeratu ostatze mota</option>
+          <option default selected hidden value="">
+            Aukeratu ostatze mota
+          </option>
           <option
             v-bind:value="mota"
             v-for="(mota, index) in ostatzeak"
@@ -57,23 +59,24 @@
       </div>
     </div>
 
-    <div class="hoteles" id="mhoteles">
-      <div
-        v-for="(hotel, index) in irazkiHotelak"
-        v-bind:key="index"
-        class="hotel shadow-sm"
-      >
-        <div class="d-flex justify-content-between">
-          <span class="title">
-            <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
-          </span>
-          <i class="fa fa-heart fs-4 text-secondary"></i>
+    <div class="hoteles" id="hoteles">
+      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-flex gap-4 align-items-center" >
+        <div>
+          <img :src="'/img/default.png'" style="width: 10rem !important;">
         </div>
-        <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
-        <span class="text-muted d-block mb-2">
-          {{ hotel.municipality }}, {{ hotel.territory }}, {{ hotel.country }}
-        </span>
-        <p v-html="truncate(hotel.turismDescription)"></p>
+        <div class="w-100">
+          <div class="d-flex justify-content-between">
+            <span class="title">
+              <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
+            </span>
+            <i class="fa fa-heart fs-4 text-secondary"></i>
+          </div>
+          <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
+          <span class="text-muted d-block mb-2">
+            {{ hotel.municipality }}, {{ hotel.territory }}, {{ hotel.country }}
+          </span>
+          <p v-html="truncate(hotel.turismDescription)"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -87,8 +90,6 @@ export default {
     if (urlParams.get("probintzia"))
       this.probintzia = urlParams.get("probintzia").toLowerCase();
     this.getHoteles();
-
-
   },
 
   data: () => ({

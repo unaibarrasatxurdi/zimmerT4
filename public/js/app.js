@@ -5495,6 +5495,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     var urlParams = new URLSearchParams(window.location.search);
@@ -61137,7 +61140,7 @@ var render = function () {
                   {
                     attrs: { default: "", selected: "", hidden: "", value: "" },
                   },
-                  [_vm._v("Aukeratu ostatze mota")]
+                  [_vm._v("\n          Aukeratu ostatze mota\n        ")]
                 ),
                 _vm._v(" "),
                 _vm._l(_vm.ostatzeak, function (mota, index) {
@@ -61156,41 +61159,57 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "hoteles", attrs: { id: "mhoteles" } },
+      { staticClass: "hoteles", attrs: { id: "hoteles" } },
       _vm._l(_vm.irazkiHotelak, function (hotel, index) {
-        return _c("div", { key: index, staticClass: "hotel shadow-sm" }, [
-          _c("div", { staticClass: "d-flex justify-content-between" }, [
-            _c("span", { staticClass: "title" }, [
-              _c("a", { attrs: { href: "/hoteles/" + hotel.id } }, [
-                _vm._v(_vm._s(hotel.documentName)),
-              ]),
+        return _c(
+          "div",
+          {
+            key: index,
+            staticClass: "hotel shadow-sm d-flex gap-4 align-items-center",
+          },
+          [
+            _c("div", [
+              _c("img", {
+                staticStyle: { width: "10rem !important" },
+                attrs: { src: "/img/default.png" },
+              }),
             ]),
             _vm._v(" "),
-            _c("i", { staticClass: "fa fa-heart fs-4 text-secondary" }),
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-muted fw-normal" }, [
-            _vm._v(_vm._s(hotel.lodgingType)),
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-muted d-block mb-2" }, [
-            _vm._v(
-              "\n        " +
-                _vm._s(hotel.municipality) +
-                ", " +
-                _vm._s(hotel.territory) +
-                ", " +
-                _vm._s(hotel.country) +
-                "\n      "
-            ),
-          ]),
-          _vm._v(" "),
-          _c("p", {
-            domProps: {
-              innerHTML: _vm._s(_vm.truncate(hotel.turismDescription)),
-            },
-          }),
-        ])
+            _c("div", { staticClass: "w-100" }, [
+              _c("div", { staticClass: "d-flex justify-content-between" }, [
+                _c("span", { staticClass: "title" }, [
+                  _c("a", { attrs: { href: "/hoteles/" + hotel.id } }, [
+                    _vm._v(_vm._s(hotel.documentName)),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-heart fs-4 text-secondary" }),
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-muted fw-normal" }, [
+                _vm._v(_vm._s(hotel.lodgingType)),
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-muted d-block mb-2" }, [
+                _vm._v(
+                  "\n          " +
+                    _vm._s(hotel.municipality) +
+                    ", " +
+                    _vm._s(hotel.territory) +
+                    ", " +
+                    _vm._s(hotel.country) +
+                    "\n        "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("p", {
+                domProps: {
+                  innerHTML: _vm._s(_vm.truncate(hotel.turismDescription)),
+                },
+              }),
+            ]),
+          ]
+        )
       }),
       0
     ),
