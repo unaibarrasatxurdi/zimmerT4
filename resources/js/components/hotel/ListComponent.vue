@@ -155,7 +155,7 @@ export default {
     Return ostatze mota duten hotelen array-a */
     bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
       return arrayDeResultadosRecibidos.filter((hotel) =>
-        hotel.lodgingType.includes(this.sartutakoOstatzeMota)
+        hotel.lodgingType.toLowerCase().includes(this.sartutakoOstatzeMota.toLowerCase())
       );
     },
   },

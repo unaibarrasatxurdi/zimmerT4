@@ -36,25 +36,25 @@
     <div class="motak container d-flex justify-content-around flex-wrap my-5" id="motak">
         <div>
             <span class="d-block fw-bold">Hotel</span>
-            <a href="#">
+            <a href="/hoteles?sartutakoOstatzeMota=hoteles">
                 <img src="img/hotel.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
             <span class="d-block fw-bold">Apartamento</span>
-            <a href="#">
+            <a href="/hoteles?sartutakoOstatzeMota=apartamento">
                 <img src="img/APARTAMENTO.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
             <span class="d-block fw-bold">Apartahotel</span>
-            <a href="#">
+            <a href="/hoteles?sartutakoOstatzeMota=hotel-apartamento">
                 <img src="img/apartahotel.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
             <span class="d-block fw-bold">Pension</span>
-            <a href="#">
+            <a href="/hoteles?sartutakoOstatzeMota=pensiones">
                 <img src="img/pennsion.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
