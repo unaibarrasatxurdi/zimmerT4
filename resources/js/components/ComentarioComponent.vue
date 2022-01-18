@@ -18,20 +18,7 @@
 <script>
 export default {
 
-  mounted() {
-    console.log(this.comentario);
-  },
-
   props: ['comentario', 'usuario'],
-
-  data: () => ({
-  }),
-
-  computed: {
-  },
-
-  methods: {
-  }
 
 };
 

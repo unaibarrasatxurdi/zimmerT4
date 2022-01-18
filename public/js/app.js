@@ -5280,15 +5280,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log(this.comentario);
-  },
-  props: ['comentario', 'usuario'],
-  data: function data() {
-    return {};
-  },
-  computed: {},
-  methods: {}
+  props: ['comentario', 'usuario']
 });
 
 /***/ }),
