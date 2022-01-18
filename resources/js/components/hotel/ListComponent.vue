@@ -33,7 +33,7 @@
       <div class="d-flex gap-3 mt-3">
         <!-- probintzia aldagaia - bilatuProbintziarenArabera funtzioak erabiltzen du -->
         <select v-model="probintzia" id="filtro-probintzia" class="form-select">
-          <option default selected hidden>Aukeratu probintzia</option>
+          <option default selected hidden value="">Aukeratu probintzia</option>
           <option value="Bizkaia">Bizkaia</option>
           <option value="Gipuzkoa">Gipuzkoa</option>
           <option value="Araba">Araba</option>
@@ -45,7 +45,7 @@
           id="filtro-tipo"
           class="form-select"
         >
-          <option default selected hidden>Aukeratu ostatze mota</option>
+          <option default selected hidden value="">Aukeratu ostatze mota</option>
           <option
             v-bind:value="mota"
             v-for="(mota, index) in ostatzeak"

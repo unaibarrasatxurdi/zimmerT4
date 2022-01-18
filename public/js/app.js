@@ -39612,7 +39612,9 @@ var render = function () {
               [
                 _c(
                   "option",
-                  { attrs: { default: "", selected: "", hidden: "" } },
+                  {
+                    attrs: { default: "", selected: "", hidden: "", value: "" },
+                  },
                   [_vm._v("Aukeratu probintzia")]
                 ),
                 _vm._v(" "),
@@ -39660,7 +39662,9 @@ var render = function () {
               [
                 _c(
                   "option",
-                  { attrs: { default: "", selected: "", hidden: "" } },
+                  {
+                    attrs: { default: "", selected: "", hidden: "", value: "" },
+                  },
                   [_vm._v("Aukeratu ostatze mota")]
                 ),
                 _vm._v(" "),
