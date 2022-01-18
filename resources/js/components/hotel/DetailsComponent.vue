@@ -10,7 +10,20 @@
 
     <div v-else class="hotel d-flex gap-5">
       <div class="d-flex flex-column gap-3 align-items-center">
-        <img :src="'/img/default.png'" class="img-fluid" style="width: 25rem !important;">
+         <div>
+          <span v-if="hotel.lodgingType==='Hoteles'">  
+          <img :src="'/img/hotel.jpg'" style="max-width: 25rem !important;">
+          </span>
+          <span v-if="hotel.lodgingType==='Pensiones'">
+            <img :src="'/img/pennsion.jpg'" style="max-width: 25rem !important;">
+          </span>
+          <span v-if="hotel.lodgingType==='Apartamentos'">
+            <img :src="'/img/APARTAMENTO.jpg'" style="max-width: 25rem !important;">
+          </span>
+          <span v-if="hotel.lodgingType==='Hotel-Apartamento'">
+            <img :src="'/img/apartahotel.jpg'" style="max-width: 25rem !important;">
+          </span>
+        </div>
         <iframe v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" style="width: 25rem; border:0;" allowfullscreen="" loading="lazy" class="m-0 p-0"></iframe>
       </div>
       <div>

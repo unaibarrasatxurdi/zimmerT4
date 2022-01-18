@@ -64,7 +64,19 @@
     <div class="hoteles" id="hoteles">
       <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-flex gap-4 align-items-center" >
         <div>
-          <img :src="'/img/default.png'" style="max-width: 10rem !important;">
+          <span v-if="hotel.lodgingType==='Hoteles'">  
+          <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
+          </span>
+          <span v-if="hotel.lodgingType==='Pensiones'">
+            <img :src="'/img/pennsion.jpg'" style="max-width: 10rem !important;">
+          </span>
+          <span v-if="hotel.lodgingType==='Apartamentos'">
+            <img :src="'/img/APARTAMENTO.jpg'" style="max-width: 10rem !important;">
+          </span>
+          <span v-if="hotel.lodgingType==='Hotel-Apartamento'">
+            <img :src="'/img/apartahotel.jpg'" style="max-width: 10rem !important;">
+          </span>
+          
         </div>
         <div class="w-100">
           <div class="d-flex justify-content-between">
@@ -155,7 +167,7 @@ export default {
     Return ostatze mota duten hotelen array-a */
     bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
       return arrayDeResultadosRecibidos.filter((hotel) =>
-        hotel.lodgingType.toLowerCase().includes(this.sartutakoOstatzeMota.toLowerCase())
+        hotel.lodgingType.includes(this.sartutakoOstatzeMota)
       );
     },
   },
