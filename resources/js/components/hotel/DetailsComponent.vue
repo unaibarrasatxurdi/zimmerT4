@@ -20,7 +20,7 @@
         {{ hotel.address }}
       </span>
       
-     <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+     <!-- <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
       <span v-if="hotel.latitudelongitude" class="text-muted d-block mb-2">
         {{ hotel.latwgs84}},{{ hotel.lonwgs84}}
       </span>
@@ -36,7 +36,8 @@
       <div v-if="hotel.tourismEmail" class="d-flex align-items-center gap-2">
         <i class="fa fa-envelope text-muted fs-5"></i>
         <a v-bind:href="'mailto:' + hotel.tourismEmail">Correo electronico</a>
-      </div>
+      </div>  
+      <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
   </div>
