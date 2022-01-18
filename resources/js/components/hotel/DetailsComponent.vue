@@ -8,36 +8,41 @@
       <span class="text-muted">Cargando datos del hotel</span>
     </div>
 
-    <div v-else class="hotel">
-      <div class="d-flex justify-content-between">
-        <span class="title">{{ hotel.documentName }}</span>
-        <i class="fa fa-heart fs-4 text-secondary"></i>
+    <div v-else class="hotel d-flex gap-5">
+      <div class="d-flex flex-column gap-3 align-items-center">
+        <img :src="'/img/default.png'" class="img-fluid" style="width: 25rem !important;">
+        <iframe v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" style="width: 25rem; border:0;" allowfullscreen="" loading="lazy" class="m-0 p-0"></iframe>
       </div>
-      <span class="text-muted d-block mb-2">
-        {{ hotel.municipality }}, {{ hotel.territory }}
-      </span>
-      <span v-if="hotel.address.length" class="text-muted d-block mb-2">
-        {{ hotel.address }}
-      </span>
-      
-     <!-- <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
-      <span v-if="hotel.latitudelongitude" class="text-muted d-block mb-2">
-        {{ hotel.latwgs84}},{{ hotel.lonwgs84}}
-      </span>
-      <span class="text-muted d-block mb-2">
-        <div id="map_canvas"></div>
-      </span>
-      
-      <p v-html="hotel.turismDescription"></p>
-      <div v-if="hotel.web" class="d-flex align-items-center gap-2 mb-2">
-        <i class="fa fa-globe text-muted fs-5"></i>
-        <a v-bind:href="hotel.web">Pagina web</a>
+      <div>
+        <div class="d-flex justify-content-between">
+          <span class="title">{{ hotel.documentName }}</span>
+          <i class="fa fa-heart fs-4 text-secondary"></i>
+        </div>
+        <span class="text-muted d-block mb-2">
+          {{ hotel.municipality }}, {{ hotel.territory }}
+        </span>
+        <span v-if="hotel.address.length" class="text-muted d-block mb-2">
+          {{ hotel.address }}
+        </span>
+        
+        <span v-if="hotel.latitudelongitude" class="text-muted d-block mb-2">
+          {{ hotel.latwgs84}},{{ hotel.lonwgs84}}
+        </span>
+        <span class="text-muted d-block mb-2">
+          <div id="map_canvas"></div>
+        </span>
+        
+        <p v-html="hotel.turismDescription"></p>
+        <div v-if="hotel.web" class="d-flex align-items-center gap-2 mb-2">
+          <i class="fa fa-globe text-muted fs-5"></i>
+          <a v-bind:href="hotel.web">Pagina web</a>
+        </div>
+        <div v-if="hotel.tourismEmail" class="d-flex align-items-center gap-2">
+          <i class="fa fa-envelope text-muted fs-5"></i>
+          <a v-bind:href="'mailto:' + hotel.tourismEmail">Correo electronico</a>
+        </div>  
       </div>
-      <div v-if="hotel.tourismEmail" class="d-flex align-items-center gap-2">
-        <i class="fa fa-envelope text-muted fs-5"></i>
-        <a v-bind:href="'mailto:' + hotel.tourismEmail">Correo electronico</a>
-      </div>  
-      <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      <!-- <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
     </div>
 
   </div>
