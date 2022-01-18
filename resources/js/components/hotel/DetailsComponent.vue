@@ -19,6 +19,15 @@
       <span v-if="hotel.address.length" class="text-muted d-block mb-2">
         {{ hotel.address }}
       </span>
+      
+     <iframe v-else v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      <span v-if="hotel.latitudelongitude" class="text-muted d-block mb-2">
+        {{ hotel.latwgs84}},{{ hotel.lonwgs84}}
+      </span>
+      <span class="text-muted d-block mb-2">
+        <div id="map_canvas"></div>
+      </span>
+      
       <p v-html="hotel.turismDescription"></p>
       <div v-if="hotel.web" class="d-flex align-items-center gap-2 mb-2">
         <i class="fa fa-globe text-muted fs-5"></i>
@@ -64,6 +73,7 @@
           return this.hoteles;
         }
       }
+      
 
     },
 
