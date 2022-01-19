@@ -103,7 +103,12 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("probintzia"))
       this.probintzia = urlParams.get("probintzia").toLowerCase();
-    this.getHoteles();
+    
+    const urlParamsII = new URLSearchParams(window.location.search);
+    if (urlParamsII.get("sartutakoOstatzeMota"))
+      this.sartutakoOstatzeMota = urlParamsII.get("sartutakoOstatzeMota");
+
+      this.getHoteles();
   },
 
   data: () => ({
