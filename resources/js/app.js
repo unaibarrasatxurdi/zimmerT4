@@ -72,6 +72,27 @@ Vue.mixin({
                 }, []
             );
         },
+        like(event, hotel_id, user_id) {
+            if (event.target.classList.contains("text-secondary")) {
+              event.target.classList.remove("text-secondary");
+              event.target.classList.add("text-danger");
+              $.ajax({
+                type: "POST",
+                url: "/gogokoa",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                data: { hotel_id: hotel_id, user_id, user_id }
+              });
+            } else if (event.target.classList.contains("text-danger")) {
+              event.target.classList.remove("text-danger");
+              event.target.classList.add("text-secondary");
+              $.ajax({
+                type: "DELETE",
+                url: "/gogokoa",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                data: { hotel_id: hotel_id, user_id, user_id }
+              });
+            }
+          }
     },
 });
 

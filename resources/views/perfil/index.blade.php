@@ -2,9 +2,6 @@
 
 @section('content')
 
-<h1>HELLO soy el perfil</h1>
-
-
 @if ($user)
 
 <div class="container my-5">
@@ -14,7 +11,7 @@
                 <div class="card-header">{{ __('Datu pertsonalak') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/muros/editar/{{ $muro->id}}">
+                    <form method="POST" action="">
                         @csrf
                         {{ method_field('PUT') }}
                         <input hidden id="initials" type="text" name="initials">

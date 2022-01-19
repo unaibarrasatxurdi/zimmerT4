@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\FavoritoController;
+use App\Http\Controllers\PerfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,10 @@ Route::middleware('cors')->group(function() {
     Route::get('/hoteles', [HotelController::class, 'index']);
     Route::get('/hoteles/{id}', [HotelController::class, 'show'])->middleware('auth');
     Route::post('/hoteles/{id}', [ComentarioController::class, 'create'])->middleware('auth');
-    Route::get('/profile', [PerfilController::class, 'index'])->middleware('auth');
-    Route::put('/profile/{id}', [PerfilController::class, 'edit'])->middleware('auth');
 });
+
+Route::get('/profile', [PerfilController::class, 'index'])->middleware('auth');
+Route::put('/profile/{id}', [PerfilController::class, 'edit'])->middleware('auth');
 
 Route::post('/gogokoa', [FavoritoController::class, 'create'])->middleware('auth');
 Route::delete('/gogokoa', [FavoritoController::class, 'delete'])->middleware('auth');
