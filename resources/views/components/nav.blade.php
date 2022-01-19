@@ -31,13 +31,13 @@
                       <li>
                           <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
                               <i class="fa fa-user fs-5 text-muted"></i>
-                              <span>Perfil</span>
+                              <span>Profila</span>
                           </a>
                       </li>
                       <li>
                           <a class="dropdown-item d-flex align-items-center gap-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                               <i class="fa fa-sign-out fs-5 text-muted"></i>
-                              <span>Cerrar sesión</span>
+                              <span>Saioa itxi</span>
                           </a>
                       </li>
                       <li>
