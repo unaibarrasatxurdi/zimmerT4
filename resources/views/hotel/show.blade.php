@@ -4,12 +4,7 @@
 
 <div class="container my-5">
 
-    {{-- <div class="d-flex gap-3">
-        <div>
-            <img src="{{ asset('img/default.png') }}" class="img-fluid" style="width: 25rem !important;">
-        </div>
-    </div> --}}
-    <hotel-details :id="{{ $id }}" class="mb-5"></hotel-details>
+    <hotel-details :id="{{ $id }}" user_id="{{ $user->id }}" fav="{{ $fav }}" class="mb-5"></hotel-details>
 
     <h4 class="my-4">Comentarios</h4>
 
@@ -17,7 +12,7 @@
         <form id="comment-form" method="POST" action="/hoteles/{{ $id }}" class="mb-2">
             @csrf
             <input type="hidden" value="{{ $id }}" name="hotel_id">
-            <input type="hidden" value="{{ Illuminate\Support\Facades\Auth::user()->id }}" name="user_id">
+            <input type="hidden" value="{{ $user->id }}" name="user_id">
             <div class="d-flex align-items-center gap-4">
                 <div>
                     <div class="user-icon bg-success">

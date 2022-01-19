@@ -4,8 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import moment from 'moment';
-
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -65,16 +63,6 @@ Vue.mixin({
                     this.hoteles[i].id = i;
                 }
                 this.ostatzeMotak = this.getOstatzeMotak();
-            });
-        },
-        getHotel: function (id) {
-            const URL = "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.json";
-            axios.get(URL).then((response) => {
-                let data = new String(response.data).replace("jsonCallback(", "").replace(");", "");
-                this.hoteles = JSON.parse(data); 
-                for (let i = 0; i < this.hoteles.length; i++) {
-                    this.hoteles[i].id = i;
-                }
             });
         },
         getOstatzeMotak: function () {

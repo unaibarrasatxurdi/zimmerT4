@@ -1,6 +1,8 @@
 <template>
   <div class="container">
 
+    <h1>Fav {{ this.fav }}</h1>
+
     <div v-if="hotel == null" class="d-flex gap-3 justify-content-center align-items-center">
       <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -29,7 +31,8 @@
       <div>
         <div class="d-flex justify-content-between">
           <span class="title">{{ hotel.documentName }}</span>
-          <i class="fa fa-heart fs-4 text-secondary"></i>
+          <i v-if="fav" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i>
+          <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i>
         </div>
         <span class="text-muted d-block mb-2">
           {{ hotel.municipality }}, {{ hotel.territory }}
@@ -38,9 +41,6 @@
           {{ hotel.address }}
         </span>
         
-        <span v-if="hotel.latitudelongitude" class="text-muted d-block mb-2">
-          {{ hotel.latwgs84}},{{ hotel.lonwgs84}}
-        </span>
         <span class="text-muted d-block mb-2">
           <div id="map_canvas"></div>
         </span>
@@ -69,10 +69,9 @@
       this.getHotel();
     },
 
-    props: ["id"],
+    props: ["id", "user_id", "fav"],
 
     data: () => ({
-      hoteles: [],
       hotel: null,
       likes: [],
       destination: ""
@@ -92,7 +91,6 @@
         }
       }
       
-
     },
 
     methods: {
@@ -105,6 +103,34 @@
           this.hotel.id = this.id;
         });
       },
+
+      like(event, hotel_id, user_id) {
+        if (event.target.classList.contains("text-secondary")) {
+          event.target.classList.remove("text-secondary");
+          event.target.classList.add("text-danger");
+          console.log(user_id + " liked " + hotel_id);
+          $.ajax({
+            type: "POST",
+            url: "/gogokoa",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data: { hotel_id: hotel_id, user_id, user_id },
+            success: data => console.log(data.msg),
+            error: data => console.log(data.msg)
+          });
+        } else if (event.target.classList.contains("text-danger")) {
+          event.target.classList.remove("text-danger");
+          event.target.classList.add("text-secondary");
+          console.log(user_id + " unliked " + hotel_id);
+          $.ajax({
+            type: "DELETE",
+            url: "/gogokoa",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data: { hotel_id: hotel_id, user_id, user_id },
+            success: data => console.log(data.msg),
+            error: data => console.log(data.msg)
+          });
+        }
+      }
 
     }
 
