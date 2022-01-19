@@ -25,6 +25,8 @@ Route::middleware('cors')->group(function() {
     Route::get('/hoteles', [HotelController::class, 'index']);
     Route::get('/hoteles/{id}', [HotelController::class, 'show'])->middleware('auth');
     Route::post('/hoteles/{id}', [ComentarioController::class, 'create'])->middleware('auth');
+    Route::get('/profile', [PerfilController::class, 'index'])->middleware('auth');
+    Route::put('/profile/{id}', [PerfilController::class, 'edit'])->middleware('auth');
 });
 
 Route::post('/gogokoa', [FavoritoController::class, 'create'])->middleware('auth');
