@@ -1,8 +1,6 @@
 <template>
   <div class="container">
 
-    <h1>Fav {{ this.fav }}</h1>
-
     <div v-if="hotel == null" class="d-flex gap-3 justify-content-center align-items-center">
       <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
