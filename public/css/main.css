@@ -81,6 +81,12 @@ INDEX DESTINATIONS
 .destinations img:hover {
     opacity: 0.95;
 }
+
+#prb{
+    margin-top: 1%;
+    margin-bottom: -1%;
+    background-color: #F5F5F5;
+}
 /* ===========================================
 INDEX MOTAK
 =========================================== */
@@ -94,8 +100,10 @@ INDEX MOTAK
     opacity: 0.95;
 }
 
-#motak{
-    background-color: #CDCDCD;
+#mota{
+    margin-top: 1%;
+    margin-bottom: -1%;
+    background-color: #F5F5F5;
 }
 
 /* ===========================================

@@ -10,6 +10,9 @@
         </div>
     </div>
 
+    <div class="container text-center mx-auto" id="prb">
+        <h2>Probintzia</h2>
+    </div>
     <div class="destinations container d-flex justify-content-around flex-wrap my-5">
         <div>
             <span class="d-block fw-bold">Araba</span>
@@ -31,8 +34,9 @@
         </div>
     </div>
 
-    <hr></hr>
-
+    <div class="container text-center mx-auto" id="mota">
+        <h2>Ostatze mota</h2>
+    </div>
     <div class="motak container d-flex justify-content-around flex-wrap my-5" id="motak">
         <div>
             <span class="d-block fw-bold">Hotel</span>
