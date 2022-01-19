@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>ZIMMER</title>
+    {{-- <title>ZIMMER</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -30,11 +30,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Pagination -->
-    <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
+    <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script> --}}
+
+    @include("components.header")
 
 </head>
 
-<body>
+<body data-aos="fade-up">
 
     @include('components.nav')
 
@@ -44,6 +46,9 @@
 
     @include('components.footer')
 
+    <script>
+        AOS.init();
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     
