@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Datu pertsonalak') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="/profile/{{ $user->id}}">
+                    <form method="POST" action="">
                         @csrf
                         {{ method_field('PUT') }}
                         <input hidden id="initials" type="text" name="initials">
@@ -56,26 +56,5 @@
     </div>
 </div>
 @endif
-
-<script type="application/javascript">
-
-    $(document).ready(function() {
-
-        $("#name").on("keyup", function() {
-            let initials_list = $(this).val().split(" ");
-            let initials = "";
-            for (let i = 0; i < initials_list.length; i++) {
-                if (initials_list[i].length > 0) {
-                    initials += initials_list[i].charAt(0).toUpperCase();
-                    if (initials.length == 2)
-                        break;
-                }
-            }
-            $("#initials").val(initials);
-        });
-
-    });
-
-</script>
 
 @endsection

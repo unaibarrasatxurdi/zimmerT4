@@ -29,7 +29,7 @@ Route::middleware('cors')->group(function() {
 });
 
 Route::get('/profile', [PerfilController::class, 'index'])->middleware('auth');
-Route::put('/profile/{id}', [PerfilController::class, 'update'])->middleware('auth');
+Route::put('/profile', [PerfilController::class, 'edit'])->middleware('auth');
 
 Route::post('/gogokoa', [FavoritoController::class, 'create'])->middleware('auth');
 Route::delete('/gogokoa', [FavoritoController::class, 'delete'])->middleware('auth');
