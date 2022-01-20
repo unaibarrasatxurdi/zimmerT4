@@ -36,7 +36,7 @@
 
 </head>
 
-<body data-aos="fade-up">
+<body class="bg-white" data-aos="fade-up">
 
     @include('components.nav')
 
