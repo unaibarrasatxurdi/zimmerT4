@@ -1,4 +1,4 @@
-<footer class="bg-dark text-light py-3" id="footer">
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-3 border-top bg-dark text-light py-3" id="footer">
   <div class="container d-flex justify-content-between flex-row" id="footerdivpadre">
     
     <div>

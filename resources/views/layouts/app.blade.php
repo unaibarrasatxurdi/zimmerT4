@@ -39,11 +39,13 @@
 <body class="bg-white" data-aos="fade-up">
 
     @include('components.nav')
-
+    
+    <div style="min-height: 100vh;">
     <main id="app">
         @yield('content')
     </main>
 
+</div>
     @include('components.footer')
 
     <script>
