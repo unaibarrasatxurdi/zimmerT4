@@ -13,7 +13,7 @@
                     <form method="POST" action="/profile/{{ $user->id}}">
                         @csrf
                         {{ method_field('PUT') }}
-                        <input hidden id="initials" type="text" name="initials">
+                        <input hidden id="initials" value="{{$user->initials}}" type="text" name="initials">
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Izena</label>
 
