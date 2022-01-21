@@ -33,6 +33,12 @@
     <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script> --}}
 
     @include("components.header")
+    
+    {{-- index.blade.php fitxategiak section hau erabiltzen du --}}
+    @section('scriptsErabiltzaile')
+{{--     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script> --}}
+    @show
 
 </head>
 

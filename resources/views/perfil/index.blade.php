@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Datu pertsonalak') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="/profile/{{ $user->id}}">
+                    <form id="formulario" method="POST" action="/profile/{{ $user->id}}">
                         @csrf
                         {{ method_field('PUT') }}
                         <input hidden id="initials" value="{{$user->initials}}" type="text" name="initials">
@@ -71,9 +71,39 @@
                         break;
                 }
             }
-            $("#initials").val(initials);
         });
 
+/*         $("form#formulario").validate({
+            rules: {
+                initials : {
+                    required: true,
+                    minlength: 1,
+                    maxlenght: 2
+                },
+                name: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+            },
+            messages : {
+                initials: {
+                    required: "Errorea"
+                },
+                name: {
+                    required: "Mesedez, sartu izena"
+                },
+                email: {
+                    required: "Mesedez, sartu email-a",
+                    email: "Errorea email-aren formatuan"
+                }  
+            }
+            });
+
+
+    }); */
     });
 
 </script>
