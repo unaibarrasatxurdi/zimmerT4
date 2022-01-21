@@ -34,16 +34,18 @@
       />
       <div class="d-flex gap-3 mt-3">
         <!-- probintzia aldagaia - bilatuProbintziarenArabera funtzioak erabiltzen du -->
-        <label id="Probintzia" class="">Probintziak</label>
+      <div>
+        <label id="Probintzia" class="d-block fw-bold">Probintziak</label>
         <select v-model="probintzia" id="filtro-probintzia" class="form-select">
           <option default selected hidden value="">Aukeratu probintzia</option>
           <option value="bizkaia">Bizkaia</option>
           <option value="gipuzkoa">Gipuzkoa</option>
           <option value="araba">Araba</option>
         </select>
-
+          </div>
         <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
-        <label id="Ostatze mota" class="">Ostatze motak</label>
+        <div>
+        <label id="Ostatze mota" class="d-block fw-bold">Ostatze motak</label>
         <select
           v-model="sartutakoOstatzeMota"
           id="filtro-tipo"
@@ -60,6 +62,7 @@
             {{ mota }}
           </option>
         </select>
+        </div>
         <button onClick="location.reload();" class="btn btn-primary">Guztiak</button>
       </div>
     </div>
