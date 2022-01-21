@@ -83,6 +83,17 @@ Vue.mixin({
                 data: { hotel_id: hotel_id, user_id, user_id }
               });
             }
+          },
+          removeHTML(str) {
+            str = str.replace(/<[^>]*>?/gm, '');
+            str = str.replaceAll('&aacute ', 'á');
+            str = str.replaceAll('&eacute ', 'é');
+            str = str.replaceAll('&iacute ', 'í');
+            str = str.replaceAll('&oacute ', 'ó');
+            str = str.replaceAll('&uacute ', 'ú');
+            str = str.replaceAll('&ntilde ', 'ñ');
+            str = str.replaceAll('&nbsp ', ' ');
+            return str;
           }
     },
 });
