@@ -63,7 +63,6 @@
           </option>
         </select>
         </div>
-        <button onClick="location.reload();" class="btn btn-primary">Guztiak</button>
       </div>
     </div>
 
