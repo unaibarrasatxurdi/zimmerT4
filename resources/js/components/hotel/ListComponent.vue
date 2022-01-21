@@ -41,6 +41,7 @@
           <option value="bizkaia">Bizkaia</option>
           <option value="gipuzkoa">Gipuzkoa</option>
           <option value="araba">Araba</option>
+          <option value="" onClick="location.reload();">Guztiak</option>
         </select>
           </div>
         <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
@@ -61,6 +62,7 @@
           >
             {{ mota }}
           </option>
+          <option value="" onClick="location.reload();">Guztiak</option>
         </select>
         </div>
       </div>
