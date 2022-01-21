@@ -43,8 +43,7 @@
           <div id="map_canvas"></div>
         </span>
         
-        <p>{{ removeHTML(hotel.turismDescription) }}</p>
-        
+        <p v-html="hotel.turismDescription"></p>
         <div v-if="hotel.web" class="d-flex align-items-center gap-2 mb-2">
           <i class="fa fa-globe text-muted fs-5"></i>
           <a v-bind:href="hotel.web">Pagina web</a>
@@ -103,33 +102,7 @@
         });
       },
 
-      // like(event, hotel_id, user_id) {
-      //   if (event.target.classList.contains("text-secondary")) {
-      //     event.target.classList.remove("text-secondary");
-      //     event.target.classList.add("text-danger");
-      //     console.log(user_id + " liked " + hotel_id);
-      //     $.ajax({
-      //       type: "POST",
-      //       url: "/gogokoa",
-      //       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-      //       data: { hotel_id: hotel_id, user_id, user_id },
-      //       success: data => console.log(data.msg),
-      //       error: data => console.log(data.msg)
-      //     });
-      //   } else if (event.target.classList.contains("text-danger")) {
-      //     event.target.classList.remove("text-danger");
-      //     event.target.classList.add("text-secondary");
-      //     console.log(user_id + " unliked " + hotel_id);
-      //     $.ajax({
-      //       type: "DELETE",
-      //       url: "/gogokoa",
-      //       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-      //       data: { hotel_id: hotel_id, user_id, user_id },
-      //       success: data => console.log(data.msg),
-      //       error: data => console.log(data.msg)
-      //     });
-      //   }
-      // }
+      
 
     }
 
