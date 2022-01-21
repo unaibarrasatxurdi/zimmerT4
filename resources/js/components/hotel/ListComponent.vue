@@ -45,7 +45,7 @@
           </div>
         <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
         <div>
-        <label id="Ostatze mota" class="d-block fw-bold">Ostatze motak</label>
+        <label id="Ostatze mota" class="d-block fw-bold">Motak</label>
         <select
           v-model="sartutakoOstatzeMota"
           id="filtro-tipo"
