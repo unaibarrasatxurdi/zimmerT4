@@ -19,13 +19,12 @@ class ComentarioController extends Controller {
 
     }
 
-    function delete($comentario_id) {
+    function delete(Request $request, $comentario_id) {
 
         $comentario = Comentario::FindOrFail($comentario_id);
         $comentario->delete();
 
-        return True;
-        
-    }
+        return redirect("/hoteles/" + $request->get("hotel_id"));
 
+    }
 }

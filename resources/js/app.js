@@ -34,15 +34,6 @@ Vue.component('home-search', require('./components/SearchComponent.vue').default
 Vue.component('comentario', require('./components/ComentarioComponent.vue').default);
 
 /** 
- * Vue Filters
- */
-
-Vue.filter('formatDate', function(value) {
-    if (value)
-      return moment(String(value)).format('MM/DD/YYYY hh:mm');
-});
-
-/** 
  * Vue Mixings
  */
 

@@ -34,6 +34,14 @@
                               <span>Profila</span>
                           </a>
                       </li>
+                      @if (Illuminate\Support\Facades\Auth::user()->rol == 1)
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-2" href="/admin">
+                                <i class="fa fa-cog fs-5 text-muted"></i>
+                                <span>Admin</span>
+                            </a>
+                        </li>
+                      @endif
                       <li>
                           <a class="dropdown-item d-flex align-items-center gap-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                               <i class="fa fa-sign-out fs-5 text-muted"></i>

@@ -9,7 +9,7 @@
     <h4 class="my-4">Comentarios</h4>
 
     @if($user)
-        <form id="comment-form" method="POST" action="/hoteles/{{ $id }}" class="mb-2">
+        <form id="comment-form" method="POST" action="/hoteles/{{ $id }}" class="mb-4">
             @csrf
             <input type="hidden" value="{{ $id }}" name="hotel_id">
             <input type="hidden" value="{{ $user->id }}" name="user_id">

@@ -7,6 +7,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +23,23 @@ use App\Http\Controllers\PerfilController;
 Auth::routes();
 
 Route::middleware('cors')->group(function() {
+    // HOME
     Route::get('/', function () { return view('welcome'); });
+    // HOTELES
     Route::get('/hoteles', [HotelController::class, 'index']);
     Route::get('/hoteles/{id}', [HotelController::class, 'show'])->middleware('auth');
     Route::post('/hoteles/{id}', [ComentarioController::class, 'create'])->middleware('auth');
+    // ADMIN
+    Route::get('/admin', [AdminController::class, 'index'])->middleware('auth');
 });
 
+// PERFIL
 Route::get('/profile', [PerfilController::class, 'index'])->middleware('auth');
 Route::put('/profile/{id}', [PerfilController::class, 'update'])->middleware('auth');
 
+// COMENTARIOS
+Route::post('/komentarioa/{id}', [ComentarioController::class, 'delete'])->middleware('auth');
+
+// FAVORITOS
 Route::post('/gogokoa', [FavoritoController::class, 'create'])->middleware('auth');
 Route::delete('/gogokoa', [FavoritoController::class, 'delete'])->middleware('auth');

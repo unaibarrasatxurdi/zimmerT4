@@ -181,4 +181,22 @@ FOOTER
     color:white;
 }
 
+.comment .del-btn {
+    width: 23px;
+    height: 23px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: red;
+    font-weight: bold;
+    font-size: 1em;
+}
 
+.comment .del-btn:hover {
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.comment .del-btn:active {
+    background-color: rgb(194, 194, 194);
+}
