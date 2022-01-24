@@ -49,8 +49,7 @@
                                 </button>
                             </div>
                         </div>
-                        <span>
-                            kaixo soy el span
+                        <span id="erroreMezua"></span>
                         </span>
                     </form>
                 </div>
@@ -131,14 +130,16 @@
             $("#initials").val(initials);
         });
 
+        /* "gorde" klikatzerakoan balidazioak egin formularioa bidali baino lehen*/
         $("#gordeBotoia").on("click", function(){
                 let erabiltzaile=new erabiltzailea(
                     $("#initials").val(),
                     $("#name").val(),
                     $("#email").val()
                 );
+                ezabatuErroreMezuak();
                 balidatuEtaBidaliFormularioa(erabiltzaile);
-            });
+        });
     });
 
         /* konprobatzaileak deitu. Konprobatzaileak true itzultzen badu, formularioa bidali*/
@@ -154,17 +155,34 @@
         /* hiru inputetan testua dagoela konprobatu
         bat hutsik badago - return false*/            
         function konprobatuDatuGuztiak(erabiltzaileDatuak){
+            let datuakOk=true;
             if((erabiltzaileDatuak.inizialak().length==0)||(!erabiltzaileDatuak.balidatuInizialak())){ 
-                return false;
+                sortuErroreMezua("izena");
+                datuakOk=false;
             }
             if((erabiltzaileDatuak.izena().length==0)||(!erabiltzaileDatuak.balidatuIzena())){
-                return false;
+                sortuErroreMezua("izena");
+                datuakOk=false;
             }
             if((erabiltzaileDatuak.email().length==0)||(!erabiltzaileDatuak.balidatuEmaila())){
-                return false;
+                sortuErroreMezua("helbide elektronikoa");
+                datuakOk=false;
             }
-            return true;
+            return datuakOk;
         }
+
+        /* ezabatu erroreen span-ean dauden errore mezuak */
+        function ezabatuErroreMezuak(){
+            $("#erroreMezua").empty();
+        }
+
+        /* testua jasotzen du parametro bezala eta errorea span-ean sartzen du */
+        function sortuErroreMezua(testua){
+            var mezua = $("<p></p>").text("Errorea '"+testua+"' atributoan. Mesedez, saiatu berriro.");
+            mezua.addClass("alert alert-warning").addClass("mt-2");
+            $("#erroreMezua").append(mezua);
+        }
+
 </script>
 
 @endsection
