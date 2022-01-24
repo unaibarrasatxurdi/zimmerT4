@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class HotelController extends Controller {
 
     function index() {
-        return view("hotel.index");
+        $user_id = Auth::user()->id;
+        $favs = Favorito::where("user_id", "LIKE", Auth::user()->id)->get("hotel_id");
+        return view("hotel.index", ["favs" => $favs, "user_id" => $user_id]);
     }
 
     function show($id) {

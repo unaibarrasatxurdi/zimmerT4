@@ -46,7 +46,7 @@
           </div>
         <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
         <div>
-        <label id="Ostatze mota" class="d-block fw-bold">Motak</label>
+        <label id="Ostatze mota" class="d-block">Motak</label>
         <select
           v-model="sartutakoOstatzeMota"
           id="filtro-tipo"
@@ -90,7 +90,10 @@
             <span class="title">
               <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
             </span>
-            <i class="fa fa-heart fs-4 text-secondary"></i>
+            <!-- <i class="fa fa-heart fs-4 text-secondary"></i> -->
+            <!-- <i v-if="favHoteles.includes(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
+            <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i>
+            <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i>
           </div>
           <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
           <span class="text-muted d-block mb-2">
@@ -107,6 +110,7 @@
 <script>
 export default {
   mounted() {
+
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("probintzia"))
       this.probintzia = urlParams.get("probintzia").toLowerCase();
@@ -115,19 +119,27 @@ export default {
     if (urlParamsII.get("sartutakoOstatzeMota"))
       this.sartutakoOstatzeMota = urlParamsII.get("sartutakoOstatzeMota");
 
-      this.getHoteles();
+    var favs_json = JSON.parse(this.favs);
+    for(let i = 0; i < favs_json.length; i++) {
+      this.favHoteles.push(favs_json[i]["hotel_id"]);
+    }
+
+    this.getHoteles();
+
   },
 
   data: () => ({
     title: "Hoteles de euskadi",
     hoteles: [],
-    likes: [],
     probintzia: "",
     sartutakoIzena: "",
     sartutakoOstatzeMota: "",
     hoteles: [],
     ostatzeMotak: [],
+    favHoteles: []
   }),
+
+  props: ["favs", "user_id"],
 
   computed: {
     /* hotelak filtratzen ditu izena, probintzia eta ostatze motaren arabera
@@ -147,6 +159,7 @@ export default {
     ostatzeak() {
       return this.ostatzeMotak;
     },
+    
   },
 
   methods: {
@@ -182,6 +195,11 @@ export default {
         hotel.lodgingType.includes(this.sartutakoOstatzeMota)
       );
     },
+    favsContains(hotel_id) {
+      let result = this.favHoteles.includes(hotel_id);
+      // console.log(result, hotel_id);
+      return result;
+    }
   },
 };
 </script>

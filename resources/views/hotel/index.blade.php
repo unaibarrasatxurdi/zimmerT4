@@ -4,7 +4,7 @@
 
 <div class="container my-5">
 
-    <hotel-list></hotel-list>
+    <hotel-list favs="{{ $favs }}"></hotel-list>
 
 </div>
 
