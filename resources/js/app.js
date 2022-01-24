@@ -34,6 +34,8 @@ Vue.component('home-search', require('./components/SearchComponent.vue').default
 
 Vue.component('comentario', require('./components/ComentarioComponent.vue').default);
 
+var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
 /** 
  * Vue Mixings
  */
@@ -42,7 +44,8 @@ Vue.mixin({
 
     data: () => ({
         hoteles: [],
-        ostatzeMotak: []
+        ostatzeMotak: [],
+        csrf: csrf_token
     }),
 
     methods: {

@@ -24,7 +24,10 @@ class ComentarioController extends Controller {
         $comentario = Comentario::FindOrFail($comentario_id);
         $comentario->delete();
 
-        return redirect("/hoteles" + $request->get("hotel_id"));
+        $hotel_id = strval($request->get("hotel_id"));
+
+        return redirect("/hoteles/" + $hotel_id);
+        // return redirect("/hoteles");
 
     }
 }
