@@ -41,5 +41,6 @@ Route::put('/profile/{id}', [PerfilController::class, 'update'])->middleware('au
 Route::post('/komentarioa/{id}', [ComentarioController::class, 'delete'])->middleware('auth');
 
 // FAVORITOS
+Route::get('/gogokoa', [FavoritoController::class, 'index'])->middleware('auth');
 Route::post('/gogokoa', [FavoritoController::class, 'create'])->middleware('auth');
 Route::delete('/gogokoa', [FavoritoController::class, 'delete'])->middleware('auth');

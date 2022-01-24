@@ -34,6 +34,12 @@
                               <span>Profila</span>
                           </a>
                       </li>
+                      <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2" href="/gogokoa">
+                            <i class="fa fa-heart fs-5 text-muted"></i>
+                            <span>Gogokoak</span>
+                        </a>
+                    </li>
                       @if (Illuminate\Support\Facades\Auth::user()->rol == 1)
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-2" href="/admin">
