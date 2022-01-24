@@ -13,7 +13,8 @@
           </div>
           <form v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
             <input type="hidden" name="_token" :value="csrf">
-            <input type="hidden" name="hotel_id" :value="this.comentario.hotel_id">
+            <!-- <input type="hidden" name="hotel_id" :value="this.comentario.hotel_id"> -->
+            <input type="hidden" name="next_url" :value="'/hoteles/' + this.comentario.hotel_id">
             <button type="submit" class="del-btn">X</button>
           </form>
         </div>

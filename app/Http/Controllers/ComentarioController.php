@@ -26,7 +26,8 @@ class ComentarioController extends Controller {
 
         $hotel_id = strval($request->get("hotel_id"));
 
-        return redirect("/hoteles/" + $hotel_id);
+        return redirect($request->get("next_url"));
+        // return redirect("/hoteles/" + $hotel_id);
         // return redirect("/hoteles");
 
     }
