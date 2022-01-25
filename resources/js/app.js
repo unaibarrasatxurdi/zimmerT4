@@ -98,7 +98,7 @@ Vue.mixin({
           str = str.replaceAll('&ntilde ', 'ñ');
           str = str.replaceAll('&nbsp ', ' ');
           return str;
-        }
+        },
     },
 });
 

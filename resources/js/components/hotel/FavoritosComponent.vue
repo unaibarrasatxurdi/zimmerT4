@@ -1,53 +1,34 @@
 <template>
     <div>
-    <div
-      v-if="hoteles.length == 0"
-      class="d-flex gap-3 justify-content-center align-items-center"
-    >
-      <div class="spinner-border text-secondary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <span class="text-muted">Buscando hoteles</span>
-    </div>
 
-        <div>
-      <div>
-          <h4>Zure hotel gogokoenak</h4>
-          <p class="text-muted">{{ irazkiHotelak.length }} hotel aurkituta</p>
+      <div v-if="hoteles.length == 0" class="d-flex gap-3 justify-content-center align-items-center" >
+        <div class="spinner-border text-secondary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <span class="text-muted">Buscando hoteles</span>
       </div>
+
+    <div class="mb-4">
+        <h4>Zure hotel gogokoenak</h4>
     </div>
 
      <div class="hoteles" id="hoteles">
-      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-flex gap-4 align-items-center" >
-        <div>
-          <span v-if="hotel.lodgingType==='Hoteles'">  
-          <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
-          </span>
-          <span v-if="hotel.lodgingType==='Pensiones'">
-            <img :src="'/img/pennsion.jpg'" style="max-width: 10rem !important;">
-          </span>
-          <span v-if="hotel.lodgingType==='Apartamentos'">
-            <img :src="'/img/APARTAMENTO.jpg'" style="max-width: 10rem !important;">
-          </span>
-          <span v-if="hotel.lodgingType==='Hotel-Apartamento'">
-            <img :src="'/img/apartahotel.jpg'" style="max-width: 10rem !important;">
-          </span>
-          
-        </div>
-        <div class="w-100">
-          <div class="d-flex justify-content-between">
-            <span class="title">
-              <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
+      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" >
+        <div v-if="favsContains(hotel.id)" class="hotel shadow-sm d-flex gap-4 align-items-center">
+          <div class="w-100">
+            <div class="d-flex justify-content-between">
+              <span class="title">
+                <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
+              </span>
+              <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i>
+              <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i>
+            </div>
+            <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
+            <span class="text-muted d-block mb-2">
+              {{ hotel.municipality }}, {{ hotel.territory }}, {{ hotel.country }}
             </span>
-            <!--<i class="fa fa-heart fs-4 text-secondary"></i>--->
-            <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i>
-            <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i>
+            <p v-html="truncate(removeHTML(hotel.turismDescription))"></p>
           </div>
-          <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
-          <span class="text-muted d-block mb-2">
-            {{ hotel.municipality }}, {{ hotel.territory }}, {{ hotel.country }}
-          </span>
-          <p v-html="truncate(removeHTML(hotel.turismDescription))"></p>
         </div>
       </div>
     </div>
@@ -66,12 +47,12 @@ export default {
     if (urlParamsII.get("favHoteles"))
       this.favHoteles = urlParamsII.get("favHoteles");
 
-  /*  var favs_json = JSON.parse(this.favs);
+    var favs_json = JSON.parse(this.favs);
     for(let i = 0; i < favs_json.length; i++) {
       this.favHoteles.push(favs_json[i]["hotel_id"]);
     }
-*/
-      this.getHoteles();
+    
+    this.getHoteles();
   },
 
   data: () => ({
@@ -103,15 +84,6 @@ export default {
       }
       return bilaketarenEmaitza;
     },
-    fav(){
-         let favh = this.favak();
-    if (this.favHoteles.length > 0) {
-        favh =
-          this.favak(favh);
-      }
-      return favh;
-    },
-
     ostatzeak() {
       return this.ostatzeMotak;
     },
@@ -155,11 +127,9 @@ export default {
       // console.log(result, hotel_id);
       return result;
     },
-    favak(hotel_id){
+    favsContains(hotel_id) {
       let result = this.favHoteles.includes(hotel_id);
-      return result.filter((hotel) =>
-      hotel.length.includes(this.favHoteles)
-      );
+      return result;
     }
   },
 };
