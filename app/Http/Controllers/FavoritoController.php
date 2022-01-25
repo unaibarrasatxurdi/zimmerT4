@@ -16,35 +16,10 @@ class FavoritoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     function index() {
-        $favorito=Auth::user(); /* Gorde $user aldagaian saioa hasi duen erabiltzailea eta bistara bidali */
-        return view('gogokoa.index', ['gogoko'=>$favorito]);
+        $user_id = Auth::user()->id;
+        $favs = Favorito::where("user_id", "LIKE", Auth::user()->id)->get("hotel_id");
+        return view("gogokoa.index", ["favs" => $favs, "user_id" => $user_id]);
     }
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-
     
     function create(Request $request) {
         if ($request->filled("hotel_id") && $request->filled("user_id")) {

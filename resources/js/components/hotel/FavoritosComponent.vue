@@ -39,7 +39,9 @@
             <span class="title">
               <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
             </span>
-            <i class="fa fa-heart fs-4 text-secondary"></i>
+            <!--<i class="fa fa-heart fs-4 text-secondary"></i>--->
+            <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i>
+            <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i>
           </div>
           <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
           <span class="text-muted d-block mb-2">
@@ -59,10 +61,16 @@ export default {
     if (urlParams.get("probintzia"))
       this.probintzia = urlParams.get("probintzia").toLowerCase();
     
-    const urlParamsII = new URLSearchParams(window.location.search);
-    if (urlParamsII.get("sartutakoOstatzeMota"))
-      this.sartutakoOstatzeMota = urlParamsII.get("sartutakoOstatzeMota");
 
+          const urlParamsII = new URLSearchParams(window.location.search);
+    if (urlParamsII.get("favHoteles"))
+      this.favHoteles = urlParamsII.get("favHoteles");
+
+  /*  var favs_json = JSON.parse(this.favs);
+    for(let i = 0; i < favs_json.length; i++) {
+      this.favHoteles.push(favs_json[i]["hotel_id"]);
+    }
+*/
       this.getHoteles();
   },
 
@@ -75,7 +83,10 @@ export default {
     sartutakoOstatzeMota: "",
     hoteles: [],
     ostatzeMotak: [],
+    favHoteles: []
   }),
+
+    props: ["favs", "user_id"],
 
   computed: {
     /* hotelak filtratzen ditu izena, probintzia eta ostatze motaren arabera
@@ -92,6 +103,15 @@ export default {
       }
       return bilaketarenEmaitza;
     },
+    fav(){
+         let favh = this.favak();
+    if (this.favHoteles.length > 0) {
+        favh =
+          this.favak(favh);
+      }
+      return favh;
+    },
+
     ostatzeak() {
       return this.ostatzeMotak;
     },
@@ -130,6 +150,17 @@ export default {
         hotel.lodgingType.includes(this.sartutakoOstatzeMota)
       );
     },
+     favsContains(hotel_id) {
+      let result = this.favHoteles.includes(hotel_id);
+      // console.log(result, hotel_id);
+      return result;
+    },
+    favak(hotel_id){
+      let result = this.favHoteles.includes(hotel_id);
+      return result.filter((hotel) =>
+      hotel.length.includes(this.favHoteles)
+      );
+    }
   },
 };
 </script>
