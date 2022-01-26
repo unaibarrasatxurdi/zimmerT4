@@ -104,8 +104,8 @@
     </div>
 
     <div class="container d-flex justify-content-center mt-5">
-      <button v-on:click="pagination(limite_defecto, hotelak_count)" class="btn btn-outline-primary">
-        {{ this.limite === 5 ? "Ikusi gehiago" : "Ikusi gutxiago" }}
+      <button v-if="this.limite != this.hotelak_count" v-on:click="pagination(limite_defecto, hotelak_count)" class="btn btn-outline-primary">
+        Ikusi gehiago
       </button>
     </div>
 
