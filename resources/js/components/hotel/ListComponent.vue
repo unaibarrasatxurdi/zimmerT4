@@ -69,7 +69,7 @@
     </div>
 
     <div class="hoteles" id="hoteles">
-      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-flex gap-4 align-items-center" >
+      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-lg-flex d-md-flex gap-4 align-items-center" >
         <div>
           <span v-if="hotel.lodgingType==='Hoteles'">  
           <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
@@ -83,7 +83,6 @@
           <span v-if="hotel.lodgingType==='Hotel-Apartamento'">
             <img :src="'/img/apartahotel.jpg'" style="max-width: 10rem !important;">
           </span>
-          
         </div>
         <div class="w-100">
           <div class="d-flex justify-content-between">
