@@ -11,7 +11,7 @@
               <span class="username fw-bold">{{ this.usuario.name }}</span>
               <span class="text-muted">{{ this.comentario.created_at }}</span>
           </div>
-          <form v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
+          <form v-if="this.usuario.rol == 1" v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
             <input type="hidden" name="_token" :value="csrf">
             <!-- <input type="hidden" name="hotel_id" :value="this.comentario.hotel_id"> -->
             <input type="hidden" name="next_url" :value="'/hoteles/' + this.comentario.hotel_id">

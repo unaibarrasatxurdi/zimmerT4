@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div
-      v-if="hoteles.length == 0"
-      class="d-flex gap-3 justify-content-center align-items-center"
-    >
+
+    <div v-if="hoteles.length == 0" class="d-flex gap-3 justify-content-center align-items-center">
       <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -43,9 +41,9 @@
           <option value="araba">Araba</option>
           <option value="" onClick="location.reload();">Guztiak</option>
         </select>
-          </div>
+      </div>
         <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
-        <div>
+      <div>
         <label id="Ostatze mota" class="d-block">Motak</label>
         <select
           v-model="sartutakoOstatzeMota"
@@ -63,10 +61,18 @@
             {{ mota }}
           </option>
           <option value="" onClick="location.reload();">Guztiak</option>
-        </select>
+          </select>
         </div>
       </div>
     </div>
+
+    <nav v-if="hoteles.length > 0" class="container d-flex justify-content-center mb-3">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      </ul>
+    </nav>
 
     <div class="hoteles" id="hoteles">
       <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-lg-flex d-md-flex gap-4 align-items-center" >
