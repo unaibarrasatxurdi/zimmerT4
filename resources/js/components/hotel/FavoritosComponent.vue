@@ -38,7 +38,14 @@
 <script>
 export default {
   mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("probintzia"))
+      this.probintzia = urlParams.get("probintzia").toLowerCase();
+    
 
+          const urlParamsII = new URLSearchParams(window.location.search);
+    if (urlParamsII.get("favHoteles"))
+      this.favHoteles = urlParamsII.get("favHoteles");
 
     var favs_json = JSON.parse(this.favs);
     for(let i = 0; i < favs_json.length; i++) {
@@ -63,6 +70,20 @@ export default {
     props: ["favs", "user_id"],
 
   computed: {
+        /* hotelak filtratzen ditu izena, probintzia eta ostatze motaren arabera
+    return bilaketa betetzen duten hotelak */
+    irazkiHotelak() {
+      let bilaketarenEmaitza = this.bilatuIzenarenArabera();
+      if (this.probintzia.length > 0) {
+        bilaketarenEmaitza =
+          this.bilatuProbintziarenArabera(bilaketarenEmaitza);
+      }
+      if (this.sartutakoOstatzeMota.length > 0) {
+        bilaketarenEmaitza =
+          this.bilatuOstatzeMotarenArabera(bilaketarenEmaitza);
+      }
+      return bilaketarenEmaitza;
+    },
     ostatzeak() {
       return this.ostatzeMotak;
     },
@@ -75,6 +96,31 @@ export default {
       } else {
         return descripcion;
       }
+    },
+        /* inputean sartutako izena hartu, 
+    hotelen array-a filtratu eta return izena duten hotelen array-a */
+    bilatuIzenarenArabera() {
+      return this.hoteles.filter((hotel) =>
+        hotel.documentName
+          .toLowerCase()
+          .includes(this.sartutakoIzena.toLowerCase())
+      );
+    },
+    /* aukeratutako probintzia hartu, 
+    array-a jaso parametro bezala eta filtratu probintziaren arabera.
+    Return probintzia duten hotelen array-a */
+    bilatuProbintziarenArabera(arrayDeResultadosRecibidos) {
+      return arrayDeResultadosRecibidos.filter((hotel) =>
+        hotel.territory.toLowerCase().includes(this.probintzia.toLowerCase())
+      );
+    },
+    /* aukeratutako ostatze mota hartu, 
+    array-a jaso parametro bezala eta filtratu motaren arabera.
+    Return ostatze mota duten hotelen array-a */
+    bilatuOstatzeMotarenArabera(arrayDeResultadosRecibidos) {
+      return arrayDeResultadosRecibidos.filter((hotel) =>
+        hotel.lodgingType.includes(this.sartutakoOstatzeMota)
+      );
     },
     
      favsContains(hotel_id) {
