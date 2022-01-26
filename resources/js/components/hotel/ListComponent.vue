@@ -66,48 +66,49 @@
       </div>
     </div>
 
-    <nav v-if="hoteles.length > 0" class="container d-flex justify-content-center mb-3">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-      </ul>
-    </nav>
-
     <div class="hoteles" id="hoteles">
-      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" class="hotel shadow-sm d-lg-flex d-md-flex gap-4 align-items-center" >
-        <div>
-          <span v-if="hotel.lodgingType==='Hoteles'">  
-          <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
-          </span>
-          <span v-if="hotel.lodgingType==='Pensiones'">
-            <img :src="'/img/pennsion.jpg'" style="max-width: 10rem !important;">
-          </span>
-          <span v-if="hotel.lodgingType==='Apartamentos'">
-            <img :src="'/img/APARTAMENTO.jpg'" style="max-width: 10rem !important;">
-          </span>
-          <span v-if="hotel.lodgingType==='Hotel-Apartamento'">
-            <img :src="'/img/apartahotel.jpg'" style="max-width: 10rem !important;">
-          </span>
-        </div>
-        <div class="w-100">
-          <div class="d-flex justify-content-between">
-            <span class="title">
-              <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
+      <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" >
+        <div v-if="index < limite" class="hotel shadow-sm d-lg-flex d-md-flex gap-4 align-items-center">
+          <div>
+            <span v-if="hotel.lodgingType==='Hoteles'">  
+            <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
             </span>
-            <!-- <i class="fa fa-heart fs-4 text-secondary"></i> -->
-            <!-- <i v-if="favHoteles.includes(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
-            <!-- <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
-            <!-- <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i> -->
+            <span v-if="hotel.lodgingType==='Pensiones'">
+              <img :src="'/img/pennsion.jpg'" style="max-width: 10rem !important;">
+            </span>
+            <span v-if="hotel.lodgingType==='Apartamentos'">
+              <img :src="'/img/APARTAMENTO.jpg'" style="max-width: 10rem !important;">
+            </span>
+            <span v-if="hotel.lodgingType==='Hotel-Apartamento'">
+              <img :src="'/img/apartahotel.jpg'" style="max-width: 10rem !important;">
+            </span>
           </div>
-          <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
-          <span class="text-muted d-block mb-2">
-            {{ hotel.municipality }}, {{ hotel.territory }}, {{ hotel.country }}
-          </span>
-          <p v-html="truncate(removeHTML(hotel.turismDescription))"></p>
+          <div class="w-100">
+            <div class="d-flex justify-content-between">
+              <span class="title">
+                <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
+              </span>
+              <!-- <i class="fa fa-heart fs-4 text-secondary"></i> -->
+              <!-- <i v-if="favHoteles.includes(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
+              <!-- <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
+              <!-- <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i> -->
+            </div>
+            <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
+            <span class="text-muted d-block mb-2">
+              {{ hotel.municipality }}, {{ hotel.territory }}, {{ hotel.country }}
+            </span>
+            <p v-html="truncate(removeHTML(hotel.turismDescription))"></p>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="container d-flex justify-content-center mt-5">
+      <button v-on:click="pagination(limite_defecto, hotelak_count)" class="btn btn-outline-primary">
+        {{ this.limite === 5 ? "Ikusi gehiago" : "Ikusi gutxiago" }}
+      </button>
+    </div>
+
   </div>
 </template>
 
@@ -137,14 +138,14 @@ export default {
   },
 
   data: () => ({
-    title: "Hoteles de euskadi",
-    hoteles: [],
     probintzia: "",
     sartutakoIzena: "",
     sartutakoOstatzeMota: "",
-    hoteles: [],
     ostatzeMotak: [],
-    favHoteles: []
+    favHoteles: [],
+    limite: 5,
+    limite_defecto: 5,
+    hotelak_count: 0,
   }),
 
   props: ["favs", "user_id"],
@@ -162,6 +163,7 @@ export default {
         bilaketarenEmaitza =
           this.bilatuOstatzeMotarenArabera(bilaketarenEmaitza);
       }
+      this.hotelak_count = bilaketarenEmaitza.length;
       return bilaketarenEmaitza;
     },
     ostatzeak() {
@@ -171,6 +173,24 @@ export default {
   },
 
   methods: {
+    pagination(limite_defecto, filters_length) {
+      let next_limite = this.limite += 5;
+      if (next_limite < filters_length) {
+        this.limite = next_limite;
+      } else {
+        this.limite = filters_length;
+      }
+      // if (this.limite === this.limite_defecto) {
+      //   if (this.limite + 5 < filters_length) {
+      //     this.limite += 5;
+      //   } else {
+      //     this.limite = filters_length;
+      //   }
+      // } else {
+      //   this.limite = this.limite_defecto;
+      // }
+      // this.limite = (this.limite === this.limite_defecto) ? filters_length : this.limite_defecto;
+    },
     truncate(descripcion) {
       if (descripcion.length > 100) {
         return descripcion.substring(0, 100) + "...";
