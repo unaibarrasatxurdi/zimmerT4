@@ -23,10 +23,6 @@ window.$ = window.jQuery = require('jquery')
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-// Vue.component('hotel-list', require('./components/hotel/IndexComponent.vue').default);
 Vue.component('hotel-list', require('./components/hotel/ListComponent.vue').default);
 Vue.component('fovoritos-list', require('./components/hotel/FavoritosComponent.vue').default);
 Vue.component('hotel-details', require('./components/hotel/DetailsComponent.vue').default);
@@ -68,6 +64,10 @@ Vue.mixin({
             );
         },
         like(event, hotel_id, user_id) {
+          $(event.target).css('transform','scale(1.5)');
+          setTimeout(function() {
+            $(event.target).css('transform','scale(1)');
+          }, 100);
           if (event.target.classList.contains("text-secondary")) {
             event.target.classList.remove("text-secondary");
             event.target.classList.add("text-danger");

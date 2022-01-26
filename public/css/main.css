@@ -24,13 +24,13 @@ LIKE BUTTON
     transition: color, transform 0.1s;
 }
 
-.fa-heart:hover {
+/* .fa-heart:hover {
     transform: scale(1.1);
 }
 
 .fa-heart:active {
     transform: scale(1.5);
-}
+} */
 
 nav .dropdown:last-child .dropdown-menu {
     right: 0;
@@ -85,7 +85,7 @@ INDEX DESTINATIONS
 #prb{
     margin-top: 1%;
     margin-bottom: -1%;
-    background-color: #F5F5F5;
+    /* background-color: #F5F5F5; */
 }
 /* ===========================================
 INDEX MOTAK
@@ -103,7 +103,7 @@ INDEX MOTAK
 #mota{
     margin-top: 1%;
     margin-bottom: -1%;
-    background-color: #F5F5F5;
+    /* background-color: #F5F5F5; */
 }
 
 /* ===========================================
