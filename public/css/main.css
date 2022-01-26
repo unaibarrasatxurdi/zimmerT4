@@ -219,3 +219,9 @@ BUSQUEDA DE HOME PAGE
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
 }
+
+.prof-button {
+    border-radius: 0.25em;
+    color: white !important;
+    background-color: #198754 !important;
+}
