@@ -29,6 +29,7 @@ Vue.component('hotel-details', require('./components/hotel/DetailsComponent.vue'
 Vue.component('home-search', require('./components/SearchComponent.vue').default);
 
 Vue.component('comentario', require('./components/ComentarioComponent.vue').default);
+Vue.component('busqueda', require('./components/BusquedaComponent.vue').default);
 
 var csrf_token = $('meta[name="csrf-token"]').attr('content');
 

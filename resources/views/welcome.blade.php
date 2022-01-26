@@ -8,6 +8,7 @@
         <div class="text-center">
             <h1>Ongi etorri Zimmer-era!</h1>
         </div>
+        <busqueda></busqueda>
     </div>
 
     <div class="container text-center mx-auto my-5" id="prb">
@@ -41,25 +42,25 @@
     <div class="motak container d-flex justify-content-around flex-wrap my-5" id="motak">
         <div>
             <span class="d-block fw-bold">Hotel</span>
-            <a href="/hoteles?sartutakoOstatzeMota=Hoteles">
+            <a href="/hoteles?mota=Hoteles">
                 <img src="img/hotel.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
             <span class="d-block fw-bold">Apartamento</span>
-            <a href="/hoteles?sartutakoOstatzeMota=Apartamentos">
+            <a href="/hoteles?mota=Apartamentos">
                 <img src="img/APARTAMENTO.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
             <span class="d-block fw-bold">Apartahotel</span>
-            <a href="/hoteles?sartutakoOstatzeMota=Hotel-Apartamento">
+            <a href="/hoteles?mota=Hotel-Apartamento">
                 <img src="img/apartahotel.jpg" width="300px" class="shadow-sm">
             </a>
         </div>
         <div>
             <span class="d-block fw-bold">Pension</span>
-            <a href="/hoteles?sartutakoOstatzeMota=Pensiones">
+            <a href="/hoteles?mota=Pensiones">
                 <img src="img/pennsion.jpg" width="300px" class="shadow-sm">
             </a>
         </div>

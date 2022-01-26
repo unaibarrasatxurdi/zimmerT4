@@ -111,12 +111,15 @@ export default {
   mounted() {
 
     const urlParams = new URLSearchParams(window.location.search);
+    
     if (urlParams.get("probintzia"))
       this.probintzia = urlParams.get("probintzia").toLowerCase();
     
-    const urlParamsII = new URLSearchParams(window.location.search);
-    if (urlParamsII.get("sartutakoOstatzeMota"))
-      this.sartutakoOstatzeMota = urlParamsII.get("sartutakoOstatzeMota");
+    if (urlParams.get("mota"))
+      this.sartutakoOstatzeMota = urlParams.get("mota");
+
+    if (urlParams.get("izena"))
+      this.sartutakoIzena = urlParams.get("izena");
 
     var favs_json = JSON.parse(this.favs);
     for(let i = 0; i < favs_json.length; i++) {

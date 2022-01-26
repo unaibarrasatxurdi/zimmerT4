@@ -75,7 +75,7 @@ INDEX DESTINATIONS
 
 .destinations img {
     transition: opacity 0.3s;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .destinations img:hover {
@@ -199,4 +199,23 @@ FOOTER
 
 .comment .del-btn:active {
     background-color: rgb(194, 194, 194);
+}
+
+/* ===========================================
+BUSQUEDA DE HOME PAGE
+=========================================== */
+
+.input-button input {
+    max-width: 80vw;
+    min-width: 50vw;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.input-button button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
 }
