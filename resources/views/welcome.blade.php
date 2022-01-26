@@ -66,10 +66,6 @@
         </div>
     </div>
 
-    <div class="container text-center mx-auto" id="mota">
-        <h2>Eskaintzak</h2>
-    </div>
-
 </div>
 
 @endsection

@@ -91,8 +91,8 @@
             </span>
             <!-- <i class="fa fa-heart fs-4 text-secondary"></i> -->
             <!-- <i v-if="favHoteles.includes(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
-            <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i>
-            <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i>
+            <!-- <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
+            <!-- <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i> -->
           </div>
           <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
           <span class="text-muted d-block mb-2">
