@@ -43,7 +43,7 @@
           <div id="map_canvas"></div>
         </span>
         
-        <p v-html="hotel.turismDescription"></p>
+        <p>{{ removeHTML(hotel.turismDescription) }}</p>
         <div v-if="hotel.web" class="d-flex align-items-center gap-2 mb-2">
           <i class="fa fa-globe text-muted fs-5"></i>
           <a v-bind:href="hotel.web">Pagina web</a>

@@ -24,32 +24,32 @@
               @endif
               @else
               <div class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      {{ Illuminate\Support\Facades\Auth::user()->name }}
+                  <a class="prof-button nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ Illuminate\Support\Facades\Auth::user()->name }}
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li>
-                          <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
+                          <a class="dropdown-item d-flex align-items-center gap-3" href="/profile">
                               <i class="fa fa-user fs-5 text-muted"></i>
                               <span>Profila</span>
                           </a>
                       </li>
                       <li>
-                        <a class="dropdown-item d-flex align-items-center gap-2" href="/gogokoa">
+                        <a class="dropdown-item d-flex align-items-center gap-3" href="/gogokoa">
                             <i class="fa fa-heart fs-5 text-muted"></i>
                             <span>Gogokoak</span>
                         </a>
                     </li>
-                      @if (Illuminate\Support\Facades\Auth::user()->rol == 1)
+                      @if (Illuminate\Support\Facades\Auth::user()->rol === 1)
                         <li>
-                            <a class="dropdown-item d-flex align-items-center gap-2" href="/admin">
+                            <a class="dropdown-item d-flex align-items-center gap-3" href="/admin">
                                 <i class="fa fa-cog fs-5 text-muted"></i>
                                 <span>Admin</span>
                             </a>
                         </li>
                       @endif
                       <li>
-                          <a class="dropdown-item d-flex align-items-center gap-1" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                          <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                               <i class="fa fa-sign-out fs-5 text-muted"></i>
                               <span>Saioa itxi</span>
                           </a>
