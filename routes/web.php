@@ -26,7 +26,7 @@ Route::middleware('cors')->group(function() {
     // HOME
     Route::get('/', function () { return view('welcome'); });
     // HOTELES
-    Route::get('/hoteles', [HotelController::class, 'index']);
+    Route::get('/hoteles', [HotelController::class, 'index'])->middleware('auth');;
     Route::get('/hoteles/{id}', [HotelController::class, 'show'])->middleware('auth');
     Route::post('/hoteles/{id}', [ComentarioController::class, 'create'])->middleware('auth');
     // ADMIN
