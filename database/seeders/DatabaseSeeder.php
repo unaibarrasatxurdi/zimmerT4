@@ -17,15 +17,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory()
-        ->count(1)
+        ->count(10)
         ->hascomentario()
         ->hasfavorito()
         ->create();
         Comentario::factory()
         ->count(10)
+        ->foruser()
         ->create();
         Favorito::factory()
         ->count(10)
+        ->foruser()
         ->create();
     }
 }
