@@ -22,49 +22,33 @@
     </div>
 
     <div v-if="hoteles.length > 0" class="mb-5">
-      <!-- probintzia sartutakoIzena - bilatuIzenarenArabera funtzioak erabiltzen du -->
-      <input
-        v-model="sartutakoIzena"
-        id="filtro-nombre"
-        type="text"
-        class="form-control"
-        placeholder="Bilatu hotelak"
-      />
       <div class="d-flex gap-3 mt-3">
         <!-- probintzia aldagaia - bilatuProbintziarenArabera funtzioak erabiltzen du -->
-      <div>
-        <label id="Probintzia" class="d-block fw-bold">Probintziak</label>
-        <select v-model="probintzia" id="filtro-probintzia" class="form-select">
-          <option default selected hidden value="">Aukeratu probintzia</option>
-          <option value="bizkaia">Bizkaia</option>
-          <option value="gipuzkoa">Gipuzkoa</option>
-          <option value="araba">Araba</option>
-          <option value="" onClick="location.reload();">Guztiak</option>
-        </select>
-      </div>
-        <!-- probintzia sartutakoOstatzeMota - bilatuOstatzeMotarenArabera funtzioak erabiltzen du -->
-      <div>
-        <label id="Ostatze mota" class="d-block">Motak</label>
-        <select
-          v-model="sartutakoOstatzeMota"
-          id="filtro-tipo"
-          class="form-select"
-        >
-          <option default selected hidden value="">
-            Aukeratu ostatze mota
-          </option>
-          <option
-            v-bind:value="mota"
-            v-for="(mota, index) in ostatzeak"
-            v-bind:key="index"
-          >
-            {{ mota }}
-          </option>
-          <option value="" onClick="location.reload();">Guztiak</option>
-          </select>
+          <div class="mb-3">
+            <label id="Probintzia" class="d-block text-muted mb-1">Probintziak</label>
+            <select v-model="probintzia" id="filtro-probintzia" class="form-select">
+              <option default selected hidden value="">Aukeratu probintzia</option>
+              <option value="bizkaia">Bizkaia</option>
+              <option value="gipuzkoa">Gipuzkoa</option>
+              <option value="araba">Araba</option>
+              <option value="" onClick="location.reload();">Guztiak</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label id="Ostatze mota" class="d-block text-muted mb-1">Motak</label>
+            <select v-model="sartutakoOstatzeMota" id="filtro-tipo" class="form-select">
+              <option default selected hidden value="">
+                Aukeratu ostatze mota
+              </option>
+              <option v-bind:value="mota" v-for="(mota, index) in ostatzeak" v-bind:key="index">
+                {{ mota }}
+              </option>
+              <option value="" onClick="location.reload();">Guztiak</option>
+            </select>
+          </div>
         </div>
+        <input v-model="sartutakoIzena" id="filtro-nombre" type="text" class="form-control" placeholder="Bilatu hotelak" />
       </div>
-    </div>
 
     <div class="hoteles" id="hoteles">
       <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" >
