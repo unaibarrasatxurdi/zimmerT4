@@ -15,6 +15,20 @@
      <div class="hoteles" id="hoteles">
       <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" >
         <div v-if="favsContains(hotel.id)" class="hotel shadow-sm d-flex gap-4 align-items-center">
+           <div>
+            <span v-if="hotel.lodgingType==='Hoteles'">  
+            <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
+            </span>
+            <span v-if="hotel.lodgingType==='Pensiones'">
+              <img :src="'/img/pennsion.jpg'" style="max-width: 10rem !important;">
+            </span>
+            <span v-if="hotel.lodgingType==='Apartamentos'">
+              <img :src="'/img/APARTAMENTO.jpg'" style="max-width: 10rem !important;">
+            </span>
+            <span v-if="hotel.lodgingType==='Hotel-Apartamento'">
+              <img :src="'/img/apartahotel.jpg'" style="max-width: 10rem !important;">
+            </span>
+          </div>
           <div class="w-100">
             <div class="d-flex justify-content-between">
               <span class="title">
