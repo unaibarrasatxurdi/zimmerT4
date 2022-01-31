@@ -1,7 +1,10 @@
 <template>
   <div class="comment d-flex align-items-top gap-4 mb-3">
     <div class="mt-1">
-        <div class="user-icon bg-secondary">
+        <div v-if="this.usuario.id == this.auth.id" class="user-icon bg-success">
+          <span class="initials">{{ this.usuario.initials }}</span>
+        </div>
+        <div v-else class="user-icon bg-secondary">
           <span class="initials">{{ this.usuario.initials }}</span>
         </div>
     </div>
@@ -12,12 +15,12 @@
             <span class="text-muted">{{ this.comentario.created_at }}</span>
         </div>
         <div class="d-flex gap-2 align-items-center">
-          <div v-if="this.usuario.rol == 1 || this.comentario.user_id == this.usuario.id" v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
-            <button type="submit" class="edit-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div v-if="this.auth.rol == 1 || this.comentario.user_id == this.auth.id" v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
+            <button type="submit" class="edit-btn" data-bs-toggle="modal" v-bind:data-bs-target="'#modal' + this.comentario.id">
               <i class="fa fa-edit fs-5 text-muted"></i>
             </button>
           </div>
-          <form v-if="this.usuario.rol == 1 || this.comentario.user_id == this.usuario.id" v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
+          <form v-if="this.auth.rol == 1 || this.comentario.user_id == this.auth.id" v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
             <input type="hidden" name="_token" :value="csrf">
             <!-- <input type="hidden" name="hotel_id" :value="this.comentario.hotel_id"> -->
             <input type="hidden" name="next_url" :value="'/hoteles/' + this.comentario.hotel_id">
@@ -27,7 +30,7 @@
       </div>
       <p class="content">{{ this.comentario.contenido }}</p>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" v-bind:id="'modal' + this.comentario.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <form v-bind:action="'/komentarioa/' + this.comentario.id" method="POST" class="modal-content">
           <div class="modal-header d-flex justify-content-between">
@@ -60,11 +63,7 @@
 <script>
 export default {
 
-  mounted: function() {
-    console.log(this.comentario.user_id, this.usuario.id, this.comentario.user_id == this.usuario.id);  
-  },
-
-  props: ['comentario', 'usuario'],
+  props: ['comentario', 'usuario', 'auth'],
 
   filters: {
     trim: function (text) {

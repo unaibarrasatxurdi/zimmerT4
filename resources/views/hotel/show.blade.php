@@ -33,7 +33,7 @@
         <p id="no-comments" class="text-muted">Este hotel no tiene comentarios</p>
     @endif
     @foreach ($comentarios as $comentario)
-        <comentario :comentario="{{ $comentario }}" :usuario="{{ App\Models\User::find($comentario->user_id) }}"></comentario>
+        <comentario :comentario="{{ $comentario }}" :usuario="{{ App\Models\User::find($comentario->user_id) }}" :auth="{{ Auth::user() }}"></comentario>
     @endforeach
     
 </div>
