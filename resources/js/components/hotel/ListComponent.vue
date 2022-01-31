@@ -28,10 +28,10 @@
             <label id="Probintzia" class="d-block text-muted mb-1">Probintziak</label>
             <select v-model="probintzia" id="filtro-probintzia" class="form-select">
               <option default selected hidden value="">Aukeratu probintzia</option>
+               <option value="" onClick="location.reload();">Guztiak</option>
               <option value="bizkaia">Bizkaia</option>
               <option value="gipuzkoa">Gipuzkoa</option>
               <option value="araba">Araba</option>
-              <option value="" onClick="location.reload();">Guztiak</option>
             </select>
           </div>
           <div class="mb-3">
@@ -40,10 +40,11 @@
               <option default selected hidden value="">
                 Aukeratu ostatze mota
               </option>
+              <option value="" onClick="location.reload();">Guztiak</option>
               <option v-bind:value="mota" v-for="(mota, index) in ostatzeak" v-bind:key="index">
                 {{ mota }}
               </option>
-              <option value="" onClick="location.reload();">Guztiak</option>
+              
             </select>
           </div>
         </div>
