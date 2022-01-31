@@ -19,16 +19,20 @@ class ComentarioController extends Controller {
 
     }
 
-    function delete(Request $request, $comentario_id) {
+    function handle(Request $request, $comentario_id) {
 
         $comentario = Comentario::FindOrFail($comentario_id);
-        $comentario->delete();
 
-        $hotel_id = strval($request->get("hotel_id"));
+        if ($request->get("method") == "UPDATE") {
+            $comentario->contenido = $request->get("contenido");
+            $comentario->save();
+        } else {
+            $comentario->delete();
+        }
+
+        // $hotel_id = strval($request->get("hotel_id"));
 
         return redirect($request->get("next_url"));
-        // return redirect("/hoteles/" + $hotel_id);
-        // return redirect("/hoteles");
 
     }
 }

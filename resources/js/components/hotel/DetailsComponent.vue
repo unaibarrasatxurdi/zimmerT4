@@ -8,7 +8,7 @@
       <span class="text-muted">Cargando datos del hotel</span>
     </div>
 
-    <div v-else class="hotel d-flex gap-5">
+    <div v-else class="hotel d-lg-flex d-md-flex gap-5">
       <div class="d-flex flex-column gap-3 align-items-center">
          <div>
           <span v-if="hotel.lodgingType==='Hoteles'">  
@@ -27,7 +27,7 @@
         <iframe v-bind:src="'https://maps.google.com/?q='+hotel.latwgs84+','+hotel.lonwgs84+'&output=embed'" style="width: 25rem; border:0;" allowfullscreen="" loading="lazy" class="m-0 p-0"></iframe>
       </div>
       <div>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between mt-lg-4 mt-md-0 mt-4">
           <span class="title">{{ hotel.documentName }}</span>
           <i v-if="fav" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i>
           <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i>

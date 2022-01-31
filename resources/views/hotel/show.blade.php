@@ -35,6 +35,7 @@
     @foreach ($comentarios as $comentario)
         <comentario :comentario="{{ $comentario }}" :usuario="{{ App\Models\User::find($comentario->user_id) }}"></comentario>
     @endforeach
+    
 </div>
 
 @endsection

@@ -38,7 +38,7 @@ Route::get('/profile', [PerfilController::class, 'index'])->middleware('auth');
 Route::put('/profile/{id}', [PerfilController::class, 'update'])->middleware('auth');
 
 // COMENTARIOS
-Route::post('/komentarioa/{id}', [ComentarioController::class, 'delete'])->middleware('auth');
+Route::post('/komentarioa/{id}', [ComentarioController::class, 'handle'])->middleware('auth');
 
 // FAVORITOS
 Route::get('/gogokoa', [FavoritoController::class, 'index'])->middleware('auth');

@@ -123,7 +123,7 @@ USER ICON
 }
 
 /* ===========================================
-COMENTS INPUT
+COMENTS
 =========================================== */
 
 #comment-form input {
@@ -141,6 +141,53 @@ COMENTS INPUT
 #comment-form input:focus {
     border-bottom: 1px solid rgb(135, 135, 135);
     outline: none;
+}
+
+.comment {
+    padding-top: 1em;
+    padding-top: 1em;
+    border-top: 1px solid #ddd;
+    /* border-bottom: 1px solid #ddd; */
+}
+
+.comment .del-btn {
+    width: 23px;
+    height: 23px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: red;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.comment .del-btn:hover {
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.comment .del-btn:active {
+    background-color: rgb(194, 194, 194);
+}
+
+.comment .edit-btn {
+    width: 23px;
+    height: 23px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: red;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.comment .edit-btn:hover {
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.comment .edit-btn:active {
+    background-color: rgb(194, 194, 194);
 }
 
 /* ===========================================
@@ -179,26 +226,6 @@ FOOTER
 }
 #footer a{
     color:white;
-}
-
-.comment .del-btn {
-    width: 23px;
-    height: 23px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: red;
-    font-weight: bold;
-    font-size: 1em;
-}
-
-.comment .del-btn:hover {
-    border-radius: 50%;
-    background-color: #ddd;
-}
-
-.comment .del-btn:active {
-    background-color: rgb(194, 194, 194);
 }
 
 /* ===========================================
