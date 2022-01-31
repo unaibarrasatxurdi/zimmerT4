@@ -54,7 +54,7 @@
     <div class="hoteles" id="hoteles">
       <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" >
         <div v-if="index < limite" class="hotel shadow-sm d-lg-flex d-md-flex gap-4 align-items-center">
-          <div>
+          <div class="mb-lg-0 mb-3">
             <span v-if="hotel.lodgingType==='Hoteles'">  
             <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
             </span>

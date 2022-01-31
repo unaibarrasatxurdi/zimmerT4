@@ -8,14 +8,18 @@
         <span class="text-muted">Buscando hoteles</span>
       </div>
 
-    <div class="mb-4">
+    <div v-if="hoteles.length > 0" class="mb-4">
         <h4>Zure hotel gogokoenak</h4>
+    </div>
+
+    <div v-if="irazkiHotelak == 0">
+      <p class="text-muted"></p>
     </div>
 
      <div class="hoteles" id="hoteles">
       <div v-for="(hotel, index) in irazkiHotelak" v-bind:key="index" >
         <div v-if="favsContains(hotel.id)" class="hotel shadow-sm d-flex gap-4 align-items-center">
-           <div>
+           <div class="mb-lg-0 mb-3">
             <span v-if="hotel.lodgingType==='Hoteles'">  
             <img :src="'/img/hotel.jpg'" style="max-width: 10rem !important;">
             </span>
