@@ -10,9 +10,12 @@
     </div>
     <div class="d-flex flex-column w-100">
       <div class="d-flex justify-content-between">
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2" >
             <span class="username fw-bold">{{ this.usuario.name }}</span>
-            <span class="text-muted">{{ this.comentario.created_at }}</span>
+
+            <span class="text-muted" >
+              {{ this.comentario.created_at.split("T")[0] }}
+            </span>
         </div>
         <div class="d-flex gap-2 align-items-center">
           <div v-if="this.auth.rol == 1 || this.comentario.user_id == this.auth.id" v-bind:action="'/komentarioa/' + this.comentario.id" method="POST">
@@ -69,7 +72,8 @@ export default {
     trim: function (text) {
       return text.trim();
     },
-  }
+  },
+
 
 };
 </script>
