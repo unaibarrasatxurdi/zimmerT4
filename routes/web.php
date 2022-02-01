@@ -37,6 +37,8 @@ Route::middleware('cors')->group(function() {
 Route::get('/profile', [PerfilController::class, 'index'])->middleware('auth');
 Route::put('/profile/{id}', [PerfilController::class, 'update'])->middleware('auth');
 
+Route::delete('/erabiltzailea/{id}', [AdminController::class, 'delete_user'])->middleware('auth');
+
 // COMENTARIOS
 Route::post('/komentarioa/{id}', [ComentarioController::class, 'handle'])->middleware('auth');
 

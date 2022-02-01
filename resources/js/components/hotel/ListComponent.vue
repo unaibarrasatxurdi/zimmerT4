@@ -73,10 +73,6 @@
               <span class="title">
                 <a v-bind:href="'/hoteles/' + hotel.id">{{ hotel.documentName }}</a>
               </span>
-              <!-- <i class="fa fa-heart fs-4 text-secondary"></i> -->
-              <!-- <i v-if="favHoteles.includes(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
-              <!-- <i v-if="favsContains(hotel.id)" v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-danger"></i> -->
-              <!-- <i v-else v-on:click="like($event, hotel.id, user_id)" class="fa fa-heart fs-4 text-secondary"></i> -->
             </div>
             <span class="text-muted fw-normal">{{ hotel.lodgingType }}</span>
             <span class="text-muted d-block mb-2">
@@ -88,7 +84,7 @@
       </div>
     </div>
 
-    <div class="container d-flex justify-content-center mt-5">
+    <div v-if="hoteles.length > 0" class="container d-flex justify-content-center mt-5">
       <button v-if="this.limite != this.hotelak_count" v-on:click="pagination(limite_defecto, hotelak_count)" class="btn btn-outline-primary">
         Ikusi gehiago
       </button>

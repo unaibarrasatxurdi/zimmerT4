@@ -18,7 +18,7 @@ class CreateComentariosTable extends Migration
             $table->string("contenido");
             $table->integer("hotel_id");
             $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');;
             $table->timestamps();
         });
     }
